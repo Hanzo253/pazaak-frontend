@@ -45,8 +45,8 @@
 }
 
 .profile-img {
-  width: 50%;
-  height: 50%;
+  width: 15rem;
+  height: 15rem;
   /* margin: 15rem auto 0 auto; */
   margin: 2rem auto;
 }
@@ -58,4 +58,31 @@
   text-align: center;
   /* position: absolute;
   left: 42%; */
+}
+
+.rounds {
+  list-style: none;
+  margin: 1rem;
+}
+
+.round {
+  display: inline-block;
+  background-color: #495057;
+  /* background-color: #2b8a3e; */
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 1rem;
+}
+
+.round-win-player {
+  box-shadow: inset 0 0 50px #51cf66, inset 20px 0 80px #2b8a3e,
+    inset -20px 0 80px #51cf66, inset 20px 0 300px #2b8a3e,
+    inset -20px 0 300px #51cf66, 0 0 50px #51cf66;
+}
+
+.round-win-computer {
+  box-shadow: inset 0 0 50px #f03e3e, inset 20px 0 80px #c92a2a,
+    inset -20px 0 80px #f03e3e, inset 20px 0 300px #c92a2a,
+    inset -20px 0 300px #f03e3e, 0 0 50px #f03e3e;
 }
