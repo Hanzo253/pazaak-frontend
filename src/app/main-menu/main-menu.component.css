@@ -1,0 +1,43 @@
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-section {
+  min-height: 30vh;
+}
+
+.heading {
+  font-size: 5rem;
+  /* color: #ffd43b; */
+  color: #111315;
+  /* -webkit-text-stroke: 1px #ffd43b; */
+  text-shadow: 2px 0 0 #ffd43b, -2px 0 0 #ffd43b, 0 2px 0 #ffd43b,
+    0 -2px 0 #ffd43b, 1px 1px #ffd43b, -1px -1px 0 #ffd43b, 1px -1px 0 #ffd43b,
+    -1px 1px 0 #ffd43b;
+}
+
+.menu-section {
+  min-height: 30vh;
+}
+
+.menu {
+  list-style: none;
+  z-index: 1;
+}
+
+.options {
+  font-size: 1.5rem;
+  border: 4mm ridge #1864ab;
+  cursor: pointer;
+  margin: 1rem auto;
+}
+
+.options:hover {
+  background-color: #339af0;
+}
+
+.option {
+  margin: 0.5rem;
+}
