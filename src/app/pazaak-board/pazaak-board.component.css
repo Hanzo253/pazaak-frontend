@@ -159,6 +159,7 @@ Font sizes (px):
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   text-align: center;
@@ -174,6 +175,10 @@ Font sizes (px):
 
 .negative {
   background-color: #c92a2a;
+}
+
+.hybrid {
+  background-color: #862e9c;
 }
 
 .number,
