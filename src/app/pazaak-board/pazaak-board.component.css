@@ -31,7 +31,6 @@ Font sizes (px):
 }
 
 .box {
-  /* background-color: #495057; */
   max-width: 100%;
   max-height: 100%;
   border: #212529 1px solid;
@@ -39,7 +38,6 @@ Font sizes (px):
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* color: #212529; */
 }
 
 .player,
@@ -51,6 +49,17 @@ Font sizes (px):
   position: relative;
   text-align: center;
   margin-top: 5.2rem;
+}
+
+.pazaak-value {
+  display: block;
+  position: relative;
+  bottom: 2rem;
+  font-size: 2rem;
+  color: #f8f9fa;
+  background-color: #212529;
+  width: 100%;
+  padding: 0 1rem;
 }
 
 .turn-indicator {
@@ -68,8 +77,8 @@ Font sizes (px):
 }
 
 .profile-img {
-  width: 15rem;
-  height: 15rem;
+  width: 12rem;
+  height: 12rem;
   /* margin: 15rem auto 0 auto; */
   margin: 2rem auto;
 }
@@ -137,10 +146,11 @@ Font sizes (px):
 
 /* Responsive columns */
 @media screen and (max-width: 600px) {
-  .column {
+  .player-hand,
+  .computer-hand {
     width: 100%;
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
   }
 }
 
@@ -152,7 +162,7 @@ Font sizes (px):
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   text-align: center;
-  background-color: #f1f1f1;
+  background-color: #ffd43b;
   min-height: 8rem;
   width: 6rem;
   margin: 1rem auto;
@@ -166,6 +176,58 @@ Font sizes (px):
   background-color: #c92a2a;
 }
 
-.number {
+.number,
+.given-number {
   font-size: 2rem;
+  background-color: #212529;
+  width: 100%;
+  color: #f8f9fa;
+}
+
+.given-number {
+  border-radius: 2rem;
+}
+
+.player-buttons {
+  position: relative;
+  left: 29rem;
+  bottom: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-btn {
+  margin: 0 1rem;
+  cursor: pointer;
+  width: 100%;
+  display: inline-block;
+  outline: 0;
+  border: 2px solid #212529;
+  border-radius: 3px;
+  color: #fff;
+  background: #212529;
+  /* font-size: 1rem; */
+  font-family: "Roboto Mono", monospace, sans-serif;
+  /* font-weight: 600;
+  line-height: 28px;
+  padding: 12px 20px; */
+  text-align: center;
+  transition-duration: 0.15s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.game-btn:hover {
+  color: #212529;
+}
+
+.end-turn:hover {
+  background-color: #ffd43b;
+}
+.stand:hover {
+  background-color: #12b886;
+}
+.forfeit:hover {
+  background-color: #fa5252;
 }

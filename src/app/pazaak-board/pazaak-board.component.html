@@ -1,5 +1,6 @@
 <section class="board">
   <div class="player">
+    <strong class="pazaak-value">0</strong>
     <p class="turn-indicator turn"></p>
     <img
       src="../../assets/LukeSkywalker.jpg"
@@ -27,10 +28,18 @@
         <h3 class="number">+1</h3>
       </div>
     </aside>
+    <div class="player-buttons">
+      <button class="game-btn end-turn">End Turn</button>
+      <button class="game-btn stand">Stand</button>
+      <button class="game-btn forfeit">Forfeit</button>
+    </div>
   </div>
   <div class="pazaak-grid">
     <div class="box-1 box" data-index-number="1">
-      <span class="symbol symbol-1"></span>
+      <!-- <span class="symbol symbol-1"></span> -->
+      <div class="card">
+        <h3 class="given-number">1</h3>
+      </div>
     </div>
     <div class="box-2 box" data-index-number="2">
       <span class="symbol symbol-2"></span>
@@ -87,13 +96,14 @@
     </div>
   </div>
   <div class="computer">
+    <strong class="pazaak-value">10</strong>
     <p class="turn-indicator"></p>
     <img
       src="../../assets/DarthVader-TotC.jpg"
       alt="computer profile image"
       class="profile-img"
     />
-    <p class="computer-name">Darth Vadar (Your Father)</p>
+    <p class="computer-name">Darth Vader</p>
     <ul class="rounds">
       <li class="round round-win-computer"></li>
       <li class="round"></li>
