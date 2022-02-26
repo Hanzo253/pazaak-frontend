@@ -29,10 +29,10 @@
       </div>
     </aside>
     <div class="player-buttons">
-      <button class="game-btn start-game" (click)="startGame()">
+      <button class="game-btn start-game" (click)="startGame()" appStartGame>
         Start Game
       </button>
-      <button class="game-btn end-turn" (click)="endGame()">End Turn</button>
+      <button class="game-btn end-turn" (click)="endTurn()">End Turn</button>
       <button class="game-btn stand">Stand</button>
       <button class="game-btn forfeit">Forfeit</button>
     </div>
@@ -88,7 +88,7 @@
     >
       <div class="box-1 box" data-index-number="1">
         <div class="card">
-          <h3 class="given-number">{{ i + 1 }}</h3>
+          <h3 class="given-number">{{ computerGrid[i] }}</h3>
         </div>
       </div>
     </ng-container>
