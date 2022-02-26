@@ -25,19 +25,24 @@ export class PazaakBoardComponent implements OnInit {
   }
 
   startGame(): void {
-    this.randomIndex = this.randomizeNum(this.mainDeck.length)
-    this.randomNum = this.mainDeck[this.randomIndex]
+    this.randomIndex = this.randomizeNum(this.mainDeck.length);
+    this.randomNum = this.mainDeck[this.randomIndex];
     this.playerGrid.push(this.randomNum);
     this.mainDeck.splice(this.randomIndex, 1);
-    console.log("playerGrid: ", this.playerGrid);
-    console.log("mainDeck: ", this.mainDeck);
+    this.playerTurn = false;
   }
 
   endGame(): void {
+    this.randomIndex = this.randomizeNum(this.mainDeck.length);
+    this.randomNum = this.mainDeck[this.randomIndex];
     if (this.playerTurn) {
-      this.playerGrid.push(this.mainDeck[0]);
+      this.playerGrid.push(this.randomNum);
+      this.mainDeck.splice(this.randomIndex, 1);
+      this.playerTurn = false;
     } else {
-      this.computerGrid.push(this.mainDeck[0]);
+      this.computerGrid.push(this.randomNum);
+      this.mainDeck.splice(this.randomIndex, 1);
+      this.playerTurn = true;
     }
   }
 

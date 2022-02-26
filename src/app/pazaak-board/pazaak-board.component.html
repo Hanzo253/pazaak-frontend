@@ -32,7 +32,7 @@
       <button class="game-btn start-game" (click)="startGame()">
         Start Game
       </button>
-      <button class="game-btn end-turn">End Turn</button>
+      <button class="game-btn end-turn" (click)="endGame()">End Turn</button>
       <button class="game-btn stand">Stand</button>
       <button class="game-btn forfeit">Forfeit</button>
     </div>
@@ -80,7 +80,12 @@
     </div> -->
   </div>
   <div class="pazaak-grid">
-    <ng-container *ngFor="let _ of [].constructor(0); let i = index">
+    <ng-container
+      *ngFor="
+        let _ of computerGrid.constructor(computerGrid.length);
+        let i = index
+      "
+    >
       <div class="box-1 box" data-index-number="1">
         <div class="card">
           <h3 class="given-number">{{ i + 1 }}</h3>
