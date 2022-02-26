@@ -200,10 +200,12 @@ Font sizes (px):
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  height: 2.5rem;
 }
 
 .game-btn {
-  margin: 0 1rem;
+  margin: 5px auto;
   cursor: pointer;
   width: 100%;
   display: inline-block;
@@ -225,6 +227,10 @@ Font sizes (px):
 
 .game-btn:hover {
   color: #212529;
+}
+
+.start-game:hover {
+  background-color: #3bc9db;
 }
 
 .end-turn:hover {
