@@ -68,6 +68,7 @@ export class PazaakBoardComponent implements OnInit {
     this.randomPlayerNum = this.mainDeck[this.randomPlayerIndex];
     this.playerGrid.push(this.randomPlayerNum);
     this.mainDeck.splice(this.randomPlayerIndex, 1);
+    this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
     this.playerTurn = true;
     this.computerTurn = false;
   }
@@ -92,12 +93,14 @@ export class PazaakBoardComponent implements OnInit {
       setTimeout(() => {
         this.computerGrid.push(this.randomComputerNum);
         this.mainDeck.splice(this.randomComputerIndex, 1);
+        this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
         this.computerTurn = true;
         this.playerTurn = false;
       }, 500);
       setTimeout(() => {
         this.playerGrid.push(this.randomPlayerNum);
         this.mainDeck.splice(this.randomPlayerIndex, 1);
+        this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
         this.playerTurn = true;
         this.computerTurn = false;
       }, 1500);
