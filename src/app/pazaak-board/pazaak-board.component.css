@@ -171,26 +171,24 @@ Font sizes (px):
 
 .positive {
   background-color: #135089;
+  cursor: pointer;
 }
 
 .negative {
   background-color: #c92a2a;
+  cursor: pointer;
 }
 
 .hybrid {
   background-color: #862e9c;
+  cursor: pointer;
 }
 
-.number,
-.given-number {
+.number {
   font-size: 2rem;
   background-color: #212529;
   width: 100%;
   color: #f8f9fa;
-}
-
-.given-number {
-  border-radius: 2rem;
 }
 
 .player-buttons {

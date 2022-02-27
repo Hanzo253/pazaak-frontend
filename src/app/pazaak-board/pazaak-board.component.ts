@@ -18,7 +18,8 @@ export class PazaakBoardComponent implements OnInit {
 
   playerGrid: Array<number> = [];
   computerGrid: Array<number> = [];
-  playerTurn: boolean = true;
+  playerTurn: boolean = false;
+  computerTurn: boolean = false;
 
   constructor() { }
 
@@ -31,7 +32,8 @@ export class PazaakBoardComponent implements OnInit {
     this.randomPlayerNum = this.mainDeck[this.randomPlayerIndex];
     this.playerGrid.push(this.randomPlayerNum);
     this.mainDeck.splice(this.randomPlayerIndex, 1);
-    this.playerTurn = false;
+    this.playerTurn = true;
+    this.computerTurn = false;
   }
 
   endTurn(): void {
@@ -51,10 +53,22 @@ export class PazaakBoardComponent implements OnInit {
     //   this.mainDeck.splice(this.randomIndex, 1);
     // }
     if (this.playerGrid.length < 9) {
-      this.computerGrid.push(this.randomComputerNum);
-      this.mainDeck.splice(this.randomComputerIndex, 1);
-      this.playerGrid.push(this.randomPlayerNum);
-      this.mainDeck.splice(this.randomPlayerIndex, 1);
+      setTimeout(() => {
+        this.computerGrid.push(this.randomComputerNum);
+        this.mainDeck.splice(this.randomComputerIndex, 1);
+        this.computerTurn = true;
+        this.playerTurn = false;
+      }, 500);
+      setTimeout(() => {
+        this.playerGrid.push(this.randomPlayerNum);
+        this.mainDeck.splice(this.randomPlayerIndex, 1);
+        this.playerTurn = true;
+        this.computerTurn = false;
+      }, 1500);
+      // this.computerGrid.push(this.randomComputerNum);
+      // this.mainDeck.splice(this.randomComputerIndex, 1);
+      // this.playerGrid.push(this.randomPlayerNum);
+      // this.mainDeck.splice(this.randomPlayerIndex, 1);
     } else {
       if (this.playerGrid.length === 9) {
         alert("Player wins!");
