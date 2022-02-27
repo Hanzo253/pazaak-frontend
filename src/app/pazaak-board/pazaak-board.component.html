@@ -1,6 +1,6 @@
 <section class="board">
   <div class="player">
-    <strong class="pazaak-value">0</strong>
+    <strong class="pazaak-value">{{ playerPazaakVal }}</strong>
     <p class="turn-indicator" [ngClass]="playerTurn ? 'turn' : ''"></p>
     <img
       src="../../assets/LukeSkywalker.jpg"
@@ -15,20 +15,39 @@
     </ul>
     <strong class="player-hand-text">Player's Hand</strong>
     <aside class="player-hand">
-      <div class="card negative">
+      <!-- <div
+        class="card"
+        [ngClass]="cardColor"
+        *ngFor="let _ of playerHand.constructor(playerHand.length)"
+      >
+        <h3 class="number">-1</h3>
+      </div> -->
+      <div class="card" [ngClass]="cardOneColor">
+        <h3 class="number">{{ playerHand[0] }}</h3>
+      </div>
+      <div class="card" [ngClass]="cardTwoColor">
+        <h3 class="number">{{ playerHand[1] }}</h3>
+      </div>
+      <div class="card" [ngClass]="cardThreeColor">
+        <h3 class="number">{{ playerHand[2] }}</h3>
+      </div>
+      <div class="card" [ngClass]="cardFourColor">
+        <h3 class="number">{{ playerHand[3] }}</h3>
+      </div>
+      <!-- <div class="card" [ngClass]="gameStarted ? 'hide-card' : ''">
         <h3 class="number">-1</h3>
       </div>
-      <div class="card negative">
-        <h3 class="number">-1</h3>
-      </div>
-      <div class="card positive">
+      <div class="card" [ngClass]="gameStarted ? 'hide-card' : ''">
         <h3 class="number">+1</h3>
       </div>
-      <div class="card positive">
+      <div class="card" [ngClass]="gameStarted ? 'hide-card' : ''">
         <h3 class="number">+1</h3>
       </div>
+      <div class="card" [ngClass]="gameStarted ? 'hide-card' : ''">
+        <h3 class="number">+1</h3>
+      </div> -->
     </aside>
-    <div class="player-buttons">
+    <div class="player-buttons" [ngClass]="cardsGone ? 'cards-gone' : ''">
       <button class="game-btn start-game" (click)="startGame()" appStartGame>
         Start Game
       </button>
@@ -49,35 +68,6 @@
         </div>
       </div>
     </ng-container>
-    <!-- <div class="box-1 box" data-index-number="1">
-      <div class="card">
-        <h3 class="given-number">1</h3>
-      </div>
-    </div>
-    <div class="box-2 box" data-index-number="2">
-      <span class="symbol symbol-2"></span>
-    </div>
-    <div class="box-3 box" data-index-number="3">
-      <span class="symbol symbol-3"></span>
-    </div>
-    <div class="box-4 box" data-index-number="4">
-      <span class="symbol symbol-4"></span>
-    </div>
-    <div class="box-5 box" data-index-number="5">
-      <span class="symbol symbol-5"></span>
-    </div>
-    <div class="box-6 box" data-index-number="6">
-      <span class="symbol symbol-6"></span>
-    </div>
-    <div class="box-7 box" data-index-number="7">
-      <span class="symbol symbol-7"></span>
-    </div>
-    <div class="box-8 box" data-index-number="8">
-      <span class="symbol symbol-8"></span>
-    </div>
-    <div class="box-9 box" data-index-number="9">
-      <span class="symbol symbol-9"></span>
-    </div> -->
   </div>
   <div class="pazaak-grid">
     <ng-container
@@ -92,36 +82,9 @@
         </div>
       </div>
     </ng-container>
-    <!-- <div class="box-1 box" data-index-number="1">
-      <span class="symbol symbol-1"></span>
-    </div>
-    <div class="box-2 box" data-index-number="2">
-      <span class="symbol symbol-2"></span>
-    </div>
-    <div class="box-3 box" data-index-number="3">
-      <span class="symbol symbol-3"></span>
-    </div>
-    <div class="box-4 box" data-index-number="4">
-      <span class="symbol symbol-4"></span>
-    </div>
-    <div class="box-5 box" data-index-number="5">
-      <span class="symbol symbol-5"></span>
-    </div>
-    <div class="box-6 box" data-index-number="6">
-      <span class="symbol symbol-6"></span>
-    </div>
-    <div class="box-7 box" data-index-number="7">
-      <span class="symbol symbol-7"></span>
-    </div>
-    <div class="box-8 box" data-index-number="8">
-      <span class="symbol symbol-8"></span>
-    </div>
-    <div class="box-9 box" data-index-number="9">
-      <span class="symbol symbol-9"></span>
-    </div> -->
   </div>
   <div class="computer">
-    <strong class="pazaak-value">0</strong>
+    <strong class="pazaak-value">{{ computerPazaakVal }}</strong>
     <p class="turn-indicator" [ngClass]="computerTurn ? 'turn' : ''"></p>
     <img
       src="../../assets/DarthVader-TotC.jpg"
@@ -136,17 +99,17 @@
     </ul>
     <strong class="computer-hand-text">Computer's Hand</strong>
     <aside class="computer-hand">
-      <div class="card hybrid">
-        <h3 class="number">&#177;1</h3>
+      <div class="card unknown">
+        <h3 class="number">?</h3>
       </div>
-      <div class="card negative">
-        <h3 class="number">-1</h3>
+      <div class="card unknown">
+        <h3 class="number">?</h3>
       </div>
-      <div class="card positive">
-        <h3 class="number">+1</h3>
+      <div class="card unknown">
+        <h3 class="number">?</h3>
       </div>
-      <div class="card negative">
-        <h3 class="number">-1</h3>
+      <div class="card unknown">
+        <h3 class="number">?</h3>
       </div>
     </aside>
   </div>

@@ -169,6 +169,11 @@ Font sizes (px):
   margin: 1rem auto;
 }
 
+.unknown {
+  background-color: #868e96;
+  cursor: pointer;
+}
+
 .positive {
   background-color: #135089;
   cursor: pointer;
@@ -200,6 +205,10 @@ Font sizes (px):
   align-items: center;
   flex-direction: column;
   height: 2.5rem;
+}
+
+.cards-gone {
+  bottom: -10rem;
 }
 
 .game-btn {

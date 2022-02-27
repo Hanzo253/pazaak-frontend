@@ -7,24 +7,60 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PazaakBoardComponent implements OnInit {
 
+  gameStarted: boolean = false;
+
+  playerPazaakVal: number = 0; 
+  computerPazaakVal: number = 0; 
+
   mainDeck: Array<number> = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10];
 
-  testDeck: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  sideDeck: Array<number> = [-1, 1, -2, 2, -3, 3, -4, 4, -5, 5, -6, 6];
+
+  playerHand: Array<number> = [];
+  computerHand: Array<number> = [];
+
+  colorClasses: Array<string> = ["positive", "negative", "hybrid"];
+  cardOneColor: string = this.randomizeColorClass(); 
+  cardTwoColor: string = this.randomizeColorClass(); 
+  cardThreeColor: string = this.randomizeColorClass(); 
+  cardFourColor: string = this.randomizeColorClass();
+  cardColor: any;
 
   randomPlayerIndex: any;
   randomPlayerNum: any;
   randomComputerIndex: any;
   randomComputerNum: any;
+  randomColorIndex: number = this.randomizeNum(this.colorClasses.length);
+  randomPlayerCardNumIndex: number = this.randomizeNum(this.sideDeck.length);
+  randomComputerCardNumIndex: number = this.randomizeNum(this.sideDeck.length);
+  randomCardNum: any;
 
   playerGrid: Array<number> = [];
   computerGrid: Array<number> = [];
   playerTurn: boolean = false;
   computerTurn: boolean = false;
 
+  cardsGone: any;
+
   constructor() { }
 
   randomizeNum(max: number) {
     return Math.floor(Math.random() * max);
+  }
+
+  randomizeColorClass() {
+    this.randomColorIndex = this.randomizeNum(this.colorClasses.length);
+    return this.colorClasses[this.randomColorIndex];
+  }
+
+  randomizePlayerCardsNum() {
+    this.randomPlayerCardNumIndex = this.randomizeNum(this.sideDeck.length);
+    return this.sideDeck[this.randomPlayerCardNumIndex];
+  }
+
+  randomizeComputerCardsNum() {
+    this.randomComputerCardNumIndex = this.randomizeNum(this.sideDeck.length);
+    return this.sideDeck[this.randomComputerCardNumIndex];
   }
 
   startGame(): void {
@@ -85,7 +121,25 @@ export class PazaakBoardComponent implements OnInit {
     
   }
 
+  // positiveNegativeTest() {
+  //   this.cardOneColor = this.randomizeColorClass();
+  //   console.log(this.cardOneColor);
+  // }
+
   ngOnInit(): void {
+    this.cardOneColor = this.randomizeColorClass(); 
+    this.cardTwoColor = this.randomizeColorClass(); 
+    this.cardThreeColor = this.randomizeColorClass(); 
+    this.cardFourColor = this.randomizeColorClass();
+
+    for (let i = 0; i < 4; i++) {
+      this.playerHand.push(this.randomizePlayerCardsNum());
+      this.computerHand.push(this.randomizePlayerCardsNum());
+    }
+
+    console.log(this.playerHand);
+
+    // this.cardsGone = true;
   }
 
 }
