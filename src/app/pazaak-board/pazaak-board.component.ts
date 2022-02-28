@@ -82,7 +82,7 @@ export class PazaakBoardComponent implements OnInit {
           }
           this.computerGrid.push(this.randomComputerNum);
           this.mainDeck.splice(this.randomComputerIndex, 1);
-          this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+          // this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
           setTimeout(() => {
             if (this.computerPazaakVal === 20) {
               alert("Computer auto stands. Keep pressing End Turn until the round is over.");
@@ -110,7 +110,7 @@ export class PazaakBoardComponent implements OnInit {
               }
               this.playerGrid.push(this.randomPlayerNum);
               this.mainDeck.splice(this.randomPlayerIndex, 1);
-              this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+              // this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
               this.checkPlayerWin();
             }
             this.playerTurn = true;
@@ -119,14 +119,26 @@ export class PazaakBoardComponent implements OnInit {
         }
       }
       this.checkPlayerWin();
-    } else {
-      if (this.playerGrid.length === 9) {
+    }
+
+    if (this.playerGrid.length === 8) {
+      setTimeout(() => {
         alert("Player wins the round!");
         this.playerGrid = [];
         this.computerGrid = [];
         this.startGame();
         this.checkPlayerRoundWins();
-      }
+      }, 1500);
+    }
+
+    if (this.computerGrid.length === 8) {
+      setTimeout(() => {
+        alert("Computer wins the round!");
+        this.playerGrid = [];
+        this.computerGrid = [];
+        this.startGame();
+        this.checkComputerRoundWins();
+      }, 500);
     }
   }
 
