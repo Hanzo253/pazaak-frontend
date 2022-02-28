@@ -50,7 +50,7 @@
       <div
         class="card"
         [ngClass]="!gameStarted ? cardThreeColor + ' disable' : cardThreeColor"
-        (click)="addCardToGridComputer(playerHand[2])"
+        (click)="addCardToGridPlayer(playerHand[2])"
         appHideCard
       >
         <h3 class="number">{{ playerHand[2] }}</h3>
@@ -58,7 +58,7 @@
       <div
         class="card"
         [ngClass]="!gameStarted ? cardFourColor + ' disable' : cardFourColor"
-        (click)="addCardToGridComputer(playerHand[3])"
+        (click)="addCardToGridPlayer(playerHand[3])"
         appHideCard
       >
         <h3 class="number">{{ playerHand[3] }}</h3>
@@ -137,16 +137,28 @@
     </ul>
     <strong class="computer-hand-text">Computer's Hand</strong>
     <aside class="computer-hand">
-      <div class="card unknown" [ngClass]="!gameStarted ? ' disable' : ''">
+      <div
+        class="card unknown"
+        [ngClass]="{ disable: computerHand.length === 0 }"
+      >
         <h3 class="number">?</h3>
       </div>
-      <div class="card unknown" [ngClass]="!gameStarted ? ' disable' : ''">
+      <div
+        class="card unknown"
+        [ngClass]="{ disable: computerHand.length === 1 }"
+      >
         <h3 class="number">?</h3>
       </div>
-      <div class="card unknown" [ngClass]="!gameStarted ? ' disable' : ''">
+      <div
+        class="card unknown"
+        [ngClass]="{ disable: computerHand.length === 2 }"
+      >
         <h3 class="number">?</h3>
       </div>
-      <div class="card unknown" [ngClass]="!gameStarted ? ' disable' : ''">
+      <div
+        class="card unknown"
+        [ngClass]="{ disable: computerHand.length === 3 }"
+      >
         <h3 class="number">?</h3>
       </div>
     </aside>

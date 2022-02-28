@@ -8,8 +8,8 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 export class PazaakBoardComponent implements OnInit {
 
   gameStarted: boolean = false;
-  playerRoundWins: any;
-  computerRoundWins: any;
+  playerRoundWins: number = 0;
+  computerRoundWins: number = 0;
 
   playerPazaakVal: number = 0; 
   computerPazaakVal: number = 0; 
@@ -90,7 +90,8 @@ export class PazaakBoardComponent implements OnInit {
       }, 500);
       if (this.playerPazaakVal > 20) {
             // alert("Your value is over 20. Sorry, you lose! Decrease it with a negative card next time.");
-            alert("Player busts. Computer wins!");
+            alert("Player busts. Computer wins the round!");
+            this.checkComputerRoundWins();
             this.restartRound();
       } else {
         if (this.playerStand === false) {
@@ -113,7 +114,8 @@ export class PazaakBoardComponent implements OnInit {
       this.checkPlayerWin();
     } else {
       if (this.playerGrid.length === 9) {
-        alert("Player wins!");
+        alert("Player wins the round!");
+        this.checkPlayerRoundWins();
         this.playerGrid = [];
         this.computerGrid = [];
         this.startGame();
@@ -188,11 +190,36 @@ export class PazaakBoardComponent implements OnInit {
     this.playerStand = false;
   }
 
+  restartGame() {
+    this.restartRound();
+    this.playerRoundWins = 0;
+    this.computerRoundWins = 0;
+  }
+
+  checkComputerRoundWins(): void {
+    if (this.computerRoundWins !== 3) {
+      this.computerRoundWins++;
+    } else {
+      alert("Computer has won all three rounds. Therefore, it has won the game!");
+      this.restartGame();
+    }
+  }
+
+  checkPlayerRoundWins(): void {
+    if (this.playerRoundWins !== 3) {
+      this.playerRoundWins++;
+    } else {
+      alert("Player has won all three rounds. Therefore, it has won the game!");
+      this.restartGame();
+    }
+  }
+
   checkComputerWin(): void {
     if (this.computerPazaakVal > 20) {
       setTimeout(() => {
         this.computerAutoStands();
-        alert("Computer busts. Player wins!");
+        alert("Computer busts. Player wins the round!");
+        this.checkPlayerRoundWins();
         this.restartRound();
       }, 500);
     } else if (this.computerPazaakVal === 20) {
@@ -200,6 +227,12 @@ export class PazaakBoardComponent implements OnInit {
         if (this.computerStand === false) {
           alert("Computer auto stands. Keep pressing End Turn until the round is over.");
           this.computerAutoStands();
+        }
+
+        if (this.playerStand && this.computerStand && this.playerPazaakVal < this.computerPazaakVal) {
+          alert("Computer wins the round!");
+          this.checkComputerRoundWins();
+          this.restartRound();
         }
       }, 500);
     }
@@ -235,13 +268,15 @@ export class PazaakBoardComponent implements OnInit {
   checkPlayerWinWithStand(): void {
     if (this.playerPazaakVal > 20 && this.playerStand) {
       setTimeout(() => {
-        alert("Player busts. Computer wins!");
+        alert("Player busts. Computer wins the round!");
+        this.checkComputerRoundWins();
         this.restartRound();
         this.startGame();
       }, 500);
     } else if (this.playerPazaakVal < 20 && this.playerPazaakVal < this.computerPazaakVal && this.playerStand) {
       setTimeout(() => {
-        alert("Computer wins!");
+        alert("Computer wins the round!");
+        this.checkComputerRoundWins();
         this.restartRound();
         this.startGame();
       }, 500);
@@ -335,7 +370,8 @@ export class PazaakBoardComponent implements OnInit {
             console.log(this.computerHand[i]);
             if (this.computerHand[i] === 4) {
               setTimeout(() => {
-                this.computerGrid.push(this.computerHand[this.randomComputerHandIndex]);
+                this.computerGrid.push(this.computerHand[i]);
+                this.computerHand.pop();
                 this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
               }, 500);
             }
@@ -346,7 +382,8 @@ export class PazaakBoardComponent implements OnInit {
             console.log(this.computerHand[i]);
             if (this.computerHand[i] === 3) {
               setTimeout(() => {
-                this.computerGrid.push(this.computerHand[this.randomComputerHandIndex]);
+                this.computerGrid.push(this.computerHand[i]);
+                this.computerHand.pop();
                 this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
               }, 500);
             } else {
@@ -359,7 +396,8 @@ export class PazaakBoardComponent implements OnInit {
             console.log(this.computerHand[i]);
             if (this.computerHand[i] === 2) {
               setTimeout(() => {
-                this.computerGrid.push(this.computerHand[this.randomComputerHandIndex]);
+                this.computerGrid.push(this.computerHand[i]);
+                this.computerHand.pop();
                 this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
               }, 500);
             } else {
@@ -372,7 +410,8 @@ export class PazaakBoardComponent implements OnInit {
             console.log(this.computerHand[i]);
             if (this.computerHand[i] === 1) {
               setTimeout(() => {
-                this.computerGrid.push(this.computerHand[this.randomComputerHandIndex]);
+                this.computerGrid.push(this.computerHand[i]);
+                this.computerHand.pop();
                 this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
               }, 500);
             } else {
@@ -385,7 +424,8 @@ export class PazaakBoardComponent implements OnInit {
             console.log(this.computerHand[i]);
             if (this.computerHand[i] === -1) {
               setTimeout(() => {
-                this.computerGrid.push(this.computerHand[this.randomComputerHandIndex]);
+                this.computerGrid.push(this.computerHand[i]);
+                this.computerHand.pop();
                 this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
               }, 500);
             } else {
@@ -398,7 +438,8 @@ export class PazaakBoardComponent implements OnInit {
             console.log(this.computerHand[i]);
             if (this.computerHand[i] === -2) {
               setTimeout(() => {
-                this.computerGrid.push(this.computerHand[this.randomComputerHandIndex]);
+                this.computerGrid.push(this.computerHand[i]);
+                this.computerHand.pop();
                 this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
               }, 500);
             } else {
@@ -411,7 +452,8 @@ export class PazaakBoardComponent implements OnInit {
             console.log(this.computerHand[i]);
             if (this.computerHand[i] === -3) {
               setTimeout(() => {
-                this.computerGrid.push(this.computerHand[this.randomComputerHandIndex]);
+                this.computerGrid.push(this.computerHand[i]);
+                this.computerHand.pop();
                 this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
               }, 500);
             } else {
@@ -424,7 +466,8 @@ export class PazaakBoardComponent implements OnInit {
             console.log(this.computerHand[i]);
             if (this.computerHand[i] === -4) {
               setTimeout(() => {
-                this.computerGrid.push(this.computerHand[this.randomComputerHandIndex]);
+                this.computerGrid.push(this.computerHand[i]);
+                this.computerHand.pop();
                 this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
               }, 500);
             } else {
@@ -437,7 +480,8 @@ export class PazaakBoardComponent implements OnInit {
             console.log(this.computerHand[i]);
             if (this.computerHand[i] === -5) {
               setTimeout(() => {
-                this.computerGrid.push(this.computerHand[this.randomComputerHandIndex]);
+                this.computerGrid.push(this.computerHand[i]);
+                this.computerHand.pop();
                 this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
               }, 500);
             } else {
@@ -450,7 +494,8 @@ export class PazaakBoardComponent implements OnInit {
             console.log(this.computerHand[i]);
             if (this.computerHand[i] === -6) {
               setTimeout(() => {
-                this.computerGrid.push(this.computerHand[this.randomComputerHandIndex]);
+                this.computerGrid.push(this.computerHand[i]);
+                this.computerHand.pop();
                 this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
               }, 500);
             } else {
@@ -477,8 +522,6 @@ export class PazaakBoardComponent implements OnInit {
 
     console.log(this.playerHand);
     console.log(this.computerHand);
-
-    this.playerRoundWins = 0;
   }
 
 }
