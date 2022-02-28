@@ -23,7 +23,7 @@ export class PazaakBoardComponent implements OnInit {
   playerStand: boolean = false;
   computerStand: boolean = false;
 
-  colorClasses: Array<string> = ["positive", "negative", "hybrid"];
+  colorClasses: Array<string> = ["positive", "negative"];
   cardOneColor: string = this.randomizeColorClass(); 
   cardTwoColor: string = this.randomizeColorClass(); 
   cardThreeColor: string = this.randomizeColorClass(); 
@@ -99,12 +99,12 @@ export class PazaakBoardComponent implements OnInit {
           if (this.computerPazaakVal > 20) {
             setTimeout(() => {
               alert("Player Wins!")
-              this.restartGame();
+              this.restartRound();
             }, 500);
           } else if (this.computerPazaakVal === 20) {
             setTimeout(() => {
               alert("Computer Wins!")
-              this.restartGame();
+              this.restartRound();
             }, 500);
           }
         }
@@ -122,13 +122,13 @@ export class PazaakBoardComponent implements OnInit {
           if (this.playerPazaakVal > 20) {
             setTimeout(() => {
               alert("Computer Wins!")
-              this.restartGame();
+              this.restartRound();
               this.startGame();
             }, 500);
           } else if (this.playerPazaakVal === 20) {
             setTimeout(() => {
               alert("Player Wins!")
-              this.restartGame();
+              this.restartRound();
               this.startGame();
             }, 500);
           }
@@ -171,7 +171,7 @@ export class PazaakBoardComponent implements OnInit {
     this.computerTurn = false;
   }
 
-  restartGame() {
+  restartRound() {
     this.playerGrid = [];
     this.computerGrid = [];
     this.playerPazaakVal = 0;
@@ -186,9 +186,6 @@ export class PazaakBoardComponent implements OnInit {
       case "negative":
         this.playerHand[0] = this.playerHand[0] * -1;
         break;
-      case "hybrid":
-        this.playerHand[0] = this.playerHand[0];
-        break;
     }
 
     switch (this.cardTwoColor) {
@@ -197,9 +194,6 @@ export class PazaakBoardComponent implements OnInit {
         break;
       case "negative":
         this.playerHand[1] = this.playerHand[1] * -1;
-        break;
-      case "hybrid":
-        this.playerHand[1] = this.playerHand[1];
         break;
     }
 
@@ -210,9 +204,6 @@ export class PazaakBoardComponent implements OnInit {
       case "negative":
         this.playerHand[2] = this.playerHand[2] * -1;
         break;
-      case "hybrid":
-        this.playerHand[2] = this.playerHand[2];
-        break;
     }
 
     switch (this.cardFourColor) {
@@ -221,9 +212,6 @@ export class PazaakBoardComponent implements OnInit {
         break;
       case "negative":
         this.playerHand[3] = this.playerHand[3] * -1;
-        break;
-      case "hybrid":
-        this.playerHand[3] = this.playerHand[3];
         break;
     }
   }

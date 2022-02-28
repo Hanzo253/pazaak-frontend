@@ -119,16 +119,16 @@
     </ul>
     <strong class="computer-hand-text">Computer's Hand</strong>
     <aside class="computer-hand">
-      <div class="card unknown">
+      <div class="card unknown" [ngClass]="!gameStarted ? ' disable' : ''">
         <h3 class="number">?</h3>
       </div>
-      <div class="card unknown">
+      <div class="card unknown" [ngClass]="!gameStarted ? ' disable' : ''">
         <h3 class="number">?</h3>
       </div>
-      <div class="card unknown">
+      <div class="card unknown" [ngClass]="!gameStarted ? ' disable' : ''">
         <h3 class="number">?</h3>
       </div>
-      <div class="card unknown">
+      <div class="card unknown" [ngClass]="!gameStarted ? ' disable' : ''">
         <h3 class="number">?</h3>
       </div>
     </aside>
