@@ -19,6 +19,9 @@ export class PazaakBoardComponent implements OnInit {
   playerHand: Array<number> = [];
   computerHand: Array<number> = [];
 
+  playerStand: boolean = false;
+  computerStand: boolean = false;
+
   colorClasses: Array<string> = ["positive", "negative", "hybrid"];
   cardOneColor: string = this.randomizeColorClass(); 
   cardTwoColor: string = this.randomizeColorClass(); 
@@ -67,6 +70,7 @@ export class PazaakBoardComponent implements OnInit {
     this.randomPlayerIndex = this.randomizeNum(this.mainDeck.length);
     this.randomPlayerNum = this.mainDeck[this.randomPlayerIndex];
     this.playerGrid.push(this.randomPlayerNum);
+    console.log("Start Button here");
     this.mainDeck.splice(this.randomPlayerIndex, 1);
     this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
     this.playerTurn = true;
@@ -78,29 +82,55 @@ export class PazaakBoardComponent implements OnInit {
     this.randomPlayerNum = this.mainDeck[this.randomPlayerIndex];
     this.randomComputerIndex = this.randomizeNum(this.mainDeck.length);
     this.randomComputerNum = this.mainDeck[this.randomComputerIndex];
-    // if (this.playerTurn) {
-    //   this.playerGrid.push(this.randomNum);
-    //   this.mainDeck.splice(this.randomIndex, 1);
-    //   this.playerTurn = false;
-    // } else {
-    //   this.computerGrid.push(this.randomNum);
-    //   this.mainDeck.splice(this.randomIndex, 1);
-    //   this.playerTurn = true;
-    //   this.playerGrid.push(this.randomNum);
-    //   this.mainDeck.splice(this.randomIndex, 1);
-    // }
+    
+    if (this.mainDeck.length === 0) {
+      alert("No more cards, main deck has been reset.");
+      this.mainDeck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10];
+    }
+
     if (this.playerGrid.length < 9) {
       setTimeout(() => {
-        this.computerGrid.push(this.randomComputerNum);
-        this.mainDeck.splice(this.randomComputerIndex, 1);
-        this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+        if (this.computerPazaakVal < 20) {
+          this.computerGrid.push(this.randomComputerNum);
+          this.mainDeck.splice(this.randomComputerIndex, 1);
+          this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+          if (this.computerPazaakVal > 20) {
+            setTimeout(() => {
+              alert("Player Wins!")
+              this.restartGame();
+            }, 500);
+          } else if (this.computerPazaakVal === 20) {
+            setTimeout(() => {
+              alert("Computer Wins!")
+              this.restartGame();
+            }, 500);
+          }
+        }
         this.computerTurn = true;
         this.playerTurn = false;
       }, 500);
       setTimeout(() => {
-        this.playerGrid.push(this.randomPlayerNum);
-        this.mainDeck.splice(this.randomPlayerIndex, 1);
-        this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+        if (this.playerPazaakVal < 20) {
+          this.playerGrid.push(this.randomPlayerNum);
+          console.log("End turn button here");
+          
+          console.log(this.playerGrid);
+          this.mainDeck.splice(this.randomPlayerIndex, 1);
+          this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+          if (this.playerPazaakVal > 20) {
+            setTimeout(() => {
+              alert("Computer Wins!")
+              this.restartGame();
+              this.startGame();
+            }, 500);
+          } else if (this.playerPazaakVal === 20) {
+            setTimeout(() => {
+              alert("Player Wins!")
+              this.restartGame();
+              this.startGame();
+            }, 500);
+          }
+        }
         this.playerTurn = true;
         this.computerTurn = false;
       }, 1500);
@@ -117,17 +147,34 @@ export class PazaakBoardComponent implements OnInit {
       }
     }
     
-    if (this.mainDeck.length === 0) {
-      alert("No more cards, main deck has been reset.");
-      this.mainDeck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10];
-    }
-    
   }
 
-  // positiveNegativeTest() {
-  //   this.cardOneColor = this.randomizeColorClass();
-  //   console.log(this.cardOneColor);
-  // }
+  playerStands(): void {
+    this.playerStand = true;
+    this.playerTurn = false;
+    // if (this.playerPazaakVal < this.computerPazaakVal && this.computerPazaakVal <= 20) {
+    //   alert("Computer wins!");
+    //   this.restartGame();
+    // } else if (this.playerPazaakVal > this.computerPazaakVal && this.playerPazaakVal <= 20) {
+    //   alert("Player wins!");
+    //   this.restartGame();
+    // } else if (this.playerPazaakVal > 20) {
+    //   alert("Player loses!");
+    //   this.restartGame();
+    // }
+  }
+
+  computerStands(): void {
+    this.computerStand = true;
+    this.computerTurn = false;
+  }
+
+  restartGame() {
+    this.playerGrid = [];
+    this.computerGrid = [];
+    this.playerPazaakVal = 0;
+    this.computerPazaakVal = 0;
+  }
 
   ngOnInit(): void {
     this.cardOneColor = this.randomizeColorClass(); 
@@ -140,9 +187,7 @@ export class PazaakBoardComponent implements OnInit {
       this.computerHand.push(this.randomizePlayerCardsNum());
     }
 
-    console.log(this.playerHand);
-
-    // this.cardsGone = true;
+    // console.log(this.playerHand);
   }
 
 }
