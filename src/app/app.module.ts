@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { PazaakBoardComponent } from './pazaak-board/pazaak-board.component';
 import { StartGameDirective } from './start-game.directive';
+import { HideCardDirective } from './hide-card.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainMenuComponent,
     PazaakBoardComponent,
-    StartGameDirective
+    StartGameDirective,
+    HideCardDirective
   ],
   imports: [
     BrowserModule,

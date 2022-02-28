@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-pazaak-board',
@@ -17,7 +17,7 @@ export class PazaakBoardComponent implements OnInit {
   sideDeck: Array<number> = [1, 2, 3, 4, 5, 6];
   // sideDeck: Array<number> = [-1, 1, -2, 2, -3, 3, -4, 4, -5, 5, -6, 6];
 
-  playerHand: Array<any> = [];
+  playerHand: Array<number> = [];
   computerHand: Array<number> = [];
 
   playerStand: boolean = false;
@@ -46,7 +46,7 @@ export class PazaakBoardComponent implements OnInit {
 
   cardsGone: any;
 
-  constructor() { }
+  constructor(private elem : ElementRef) { }
 
   randomizeNum(max: number) {
     return Math.floor(Math.random() * max);
@@ -74,6 +74,7 @@ export class PazaakBoardComponent implements OnInit {
     console.log("Start Button here");
     this.mainDeck.splice(this.randomPlayerIndex, 1);
     this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+    this.gameStarted = true;
     this.playerTurn = true;
     this.computerTurn = false;
   }
@@ -186,7 +187,7 @@ export class PazaakBoardComponent implements OnInit {
         this.playerHand[0] = this.playerHand[0] * -1;
         break;
       case "hybrid":
-        this.playerHand[0] = "±" + this.playerHand[0];
+        this.playerHand[0] = this.playerHand[0];
         break;
     }
 
@@ -198,7 +199,7 @@ export class PazaakBoardComponent implements OnInit {
         this.playerHand[1] = this.playerHand[1] * -1;
         break;
       case "hybrid":
-        this.playerHand[1] = "±" + this.playerHand[1];
+        this.playerHand[1] = this.playerHand[1];
         break;
     }
 
@@ -210,7 +211,7 @@ export class PazaakBoardComponent implements OnInit {
         this.playerHand[2] = this.playerHand[2] * -1;
         break;
       case "hybrid":
-        this.playerHand[2] = "±" + this.playerHand[2];
+        this.playerHand[2] = this.playerHand[2];
         break;
     }
 
@@ -222,8 +223,17 @@ export class PazaakBoardComponent implements OnInit {
         this.playerHand[3] = this.playerHand[3] * -1;
         break;
       case "hybrid":
-        this.playerHand[3] = "±" + this.playerHand[3];
+        this.playerHand[3] = this.playerHand[3];
         break;
+    }
+  }
+
+  addCardToGrid(cardNum: number): void {
+    if (this.gameStarted) {
+      this.playerGrid.push(cardNum);
+      this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+    } else {
+      alert("Game has not started yet.");
     }
   }
 

@@ -197,9 +197,10 @@ Font sizes (px):
 }
 
 .player-buttons {
-  position: relative;
-  left: 29rem;
+  position: fixed;
+  left: 31.2rem;
   bottom: 10rem;
+  width: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -248,4 +249,8 @@ Font sizes (px):
 }
 .forfeit:hover {
   background-color: #fa5252;
+}
+
+.disable {
+  z-index: -1;
 }
