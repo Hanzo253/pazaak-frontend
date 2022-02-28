@@ -37,6 +37,7 @@ export class PazaakBoardComponent implements OnInit {
   randomColorIndex: number = this.randomizeNum(this.colorClasses.length);
   randomPlayerCardNumIndex: number = this.randomizeNum(this.sideDeck.length);
   randomComputerCardNumIndex: number = this.randomizeNum(this.sideDeck.length);
+  randomComputerHandIndex: number = this.randomizeNum(this.computerHand.length);
   randomCardNum: any;
 
   playerGrid: Array<number> = [];
@@ -69,48 +70,55 @@ export class PazaakBoardComponent implements OnInit {
 
   generateGivenCards(): void {
     if (this.playerGrid.length < 9) {
+      // if (this.playerPazaakVal > 20)
       setTimeout(() => {
         if (this.computerPazaakVal < 20) {
+          if (this.randomComputerNum === NaN) {
+            alert("No more cards, main deck has been reset. Press the End Turn button again to resume");
+            this.mainDeck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10];
+          }
           this.computerGrid.push(this.randomComputerNum);
           this.mainDeck.splice(this.randomComputerIndex, 1);
           this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
-          if (this.computerPazaakVal > 20) {
-            setTimeout(() => {
-              alert("Player Wins!")
-              this.restartRound();
-            }, 500);
-          } else if (this.computerPazaakVal === 20) {
-            setTimeout(() => {
-              alert("Computer Wins!")
-              this.restartRound();
-            }, 500);
-          }
+          // if (this.computerPazaakVal > 20) {
+          //   setTimeout(() => {
+          //     alert("Player Wins!")
+          //     this.restartRound();
+          //   }, 500);
+          // } else if (this.computerPazaakVal === 20) {
+          //   setTimeout(() => {
+          //     alert("Computer Wins!")
+          //     this.restartRound();
+          //   }, 500);
+          // }
+          this.checkComputerWin();
         }
         this.computerTurn = true;
         this.playerTurn = false;
       }, 500);
-      setTimeout(() => {
-        if (this.playerPazaakVal < 20) {
-          this.playerGrid.push(this.randomPlayerNum);
-          this.mainDeck.splice(this.randomPlayerIndex, 1);
-          this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
-          if (this.playerPazaakVal > 20) {
-            setTimeout(() => {
-              alert("Computer Wins!")
-              this.restartRound();
-              this.startGame();
-            }, 500);
-          } else if (this.playerPazaakVal === 20) {
-            setTimeout(() => {
-              alert("Player Wins!")
-              this.restartRound();
-              this.startGame();
-            }, 500);
-          }
+      if (this.playerPazaakVal > 20) {
+            // alert("Your value is over 20. Sorry, you lose! Decrease it with a negative card next time.");
+            alert("Computer Wins! 2");
+            this.restartRound();
+      } else {
+        if (this.playerStand === false) {
+          setTimeout(() => {
+            if (this.playerPazaakVal < 20) {
+              if (this.randomPlayerNum === NaN) {
+                alert("No more cards, main deck has been reset. Press the End Turn button again to resume");
+                this.mainDeck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10];
+              }
+              this.playerGrid.push(this.randomPlayerNum);
+              this.mainDeck.splice(this.randomPlayerIndex, 1);
+              this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+              this.checkPlayerWin();
+            }
+            this.playerTurn = true;
+            this.computerTurn = false;
+          }, 1500);
         }
-        this.playerTurn = true;
-        this.computerTurn = false;
-      }, 1500);
+      }
+      this.checkPlayerWin();
     } else {
       if (this.playerGrid.length === 9) {
         alert("Player wins!");
@@ -122,14 +130,20 @@ export class PazaakBoardComponent implements OnInit {
   }
 
   startGame(): void {
+    this.restartRound();
     this.randomPlayerIndex = this.randomizeNum(this.mainDeck.length);
     this.randomPlayerNum = this.mainDeck[this.randomPlayerIndex];
-    this.playerGrid.push(this.randomPlayerNum);
-    this.mainDeck.splice(this.randomPlayerIndex, 1);
-    this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
-    this.gameStarted = true;
-    this.playerTurn = true;
-    this.computerTurn = false;
+    if (this.randomPlayerNum === NaN) {
+      alert("No more cards, main deck has been reset. Press the End Turn button again to resume");
+      this.mainDeck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10];
+    } else {
+      this.playerGrid.push(this.randomPlayerNum);
+      this.mainDeck.splice(this.randomPlayerIndex, 1);
+      this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+      this.gameStarted = true;
+      this.playerTurn = true;
+      this.computerTurn = false;
+    }
   }
 
   endTurn(): void {
@@ -150,6 +164,8 @@ export class PazaakBoardComponent implements OnInit {
   playerStands(): void {
     this.playerStand = true;
     this.playerTurn = false;
+    alert("Player stands. Keep pressing End Turn until the round is over.");
+    this.checkPlayerWinWithStand();
     // if (this.playerPazaakVal < this.computerPazaakVal && this.computerPazaakVal <= 20) {
     //   alert("Computer wins!");
     //   this.restartGame();
@@ -162,7 +178,12 @@ export class PazaakBoardComponent implements OnInit {
     // }
   }
 
-  computerStands(): void {
+  playerAutoStands(): void {
+    this.playerStand = true;
+    this.playerTurn = false;
+  }
+
+  computerAutoStands(): void {
     this.computerStand = true;
     this.computerTurn = false;
   }
@@ -172,6 +193,64 @@ export class PazaakBoardComponent implements OnInit {
     this.computerGrid = [];
     this.playerPazaakVal = 0;
     this.computerPazaakVal = 0;
+    this.playerStand = false;
+  }
+
+  checkComputerWin(): void {
+    if (this.computerPazaakVal > 20) {
+      setTimeout(() => {
+        alert("Player Wins! 1");
+        this.restartRound();
+      }, 500);
+    } else if (this.computerPazaakVal === 20 && this.playerPazaakVal === 20) {
+      setTimeout(() => {
+        alert("Draw! Starting new round wth no win given....");
+        this.restartRound();
+        this.startGame();
+      }, 500);
+    } else if (this.computerPazaakVal === 20) {
+      setTimeout(() => {
+        if (this.computerStand === false) {
+          alert("Computer auto stands. Keep pressing End Turn until the round is over.");
+          this.computerAutoStands();
+        }
+      }, 500);
+    }
+  }
+
+  checkPlayerWin(): void {
+    if (this.playerPazaakVal === 20) {
+      setTimeout(() => {
+        if (this.playerStand === false) {
+          alert("Player auto stands. Keep pressing End Turn until the round is over.");
+          this.playerAutoStands();
+        }
+        // this.restartRound();
+        // this.startGame();
+      }, 500);
+    } else if (this.computerPazaakVal === 20 && this.playerPazaakVal === 20) {
+      setTimeout(() => {
+        alert("Draw! Starting new round wth no win given....");
+        this.restartRound();
+        this.startGame();
+      }, 500)
+    }
+  }
+
+  checkPlayerWinWithStand(): void {
+    if (this.playerPazaakVal > 20 && this.playerStand) {
+      setTimeout(() => {
+        alert("Player busts.");
+        this.restartRound();
+        this.startGame();
+      }, 500);
+    } else if (this.playerPazaakVal < 20 && this.playerPazaakVal < this.computerPazaakVal && this.playerStand) {
+      setTimeout(() => {
+        alert("Computer Wins!");
+        this.restartRound();
+        this.startGame();
+      }, 500);
+    }
   }
 
   checkCardColors(): void {
@@ -212,12 +291,19 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
-  addCardToGrid(cardNum: number): void {
+  addCardToGridPlayer(cardNum: number): void {
     if (this.gameStarted) {
       this.playerGrid.push(cardNum);
       this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
-    } else {
-      alert("Game has not started yet.");
+      this.checkPlayerWin();
+    }
+  }
+
+  addCardToGridComputer(cardNum: number): void {
+    if (this.gameStarted) {
+      this.computerGrid.push(cardNum);
+      this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+      this.checkComputerWin();
     }
   }
 

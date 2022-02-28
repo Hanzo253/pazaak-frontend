@@ -14,7 +14,7 @@
       <li class="round"></li>
     </ul>
     <strong class="player-hand-text">Player's Hand</strong>
-    <aside class="player-hand">
+    <aside class="player-hand" [ngClass]="playerStand ? 'player-stands' : ''">
       <!-- <div
         class="card"
         [ngClass]="cardColor"
@@ -25,7 +25,7 @@
       <div
         class="card"
         [ngClass]="!gameStarted ? cardOneColor + ' disable' : cardOneColor"
-        (click)="addCardToGrid(playerHand[0])"
+        (click)="addCardToGridPlayer(playerHand[0])"
         appHideCard
       >
         <h3 class="number">{{ playerHand[0] }}</h3>
@@ -33,7 +33,7 @@
       <div
         class="card"
         [ngClass]="!gameStarted ? cardTwoColor + ' disable' : cardTwoColor"
-        (click)="addCardToGrid(playerHand[1])"
+        (click)="addCardToGridPlayer(playerHand[1])"
         appHideCard
       >
         <h3 class="number">{{ playerHand[1] }}</h3>
@@ -41,7 +41,7 @@
       <div
         class="card"
         [ngClass]="!gameStarted ? cardThreeColor + ' disable' : cardThreeColor"
-        (click)="addCardToGrid(playerHand[2])"
+        (click)="addCardToGridComputer(playerHand[2])"
         appHideCard
       >
         <h3 class="number">{{ playerHand[2] }}</h3>
@@ -49,7 +49,7 @@
       <div
         class="card"
         [ngClass]="!gameStarted ? cardFourColor + ' disable' : cardFourColor"
-        (click)="addCardToGrid(playerHand[3])"
+        (click)="addCardToGridComputer(playerHand[3])"
         appHideCard
       >
         <h3 class="number">{{ playerHand[3] }}</h3>
