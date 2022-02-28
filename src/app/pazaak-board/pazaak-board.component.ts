@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pazaak-board',
@@ -49,7 +50,7 @@ export class PazaakBoardComponent implements OnInit {
 
   cardsGone: any;
 
-  constructor(private elem : ElementRef) { }
+  constructor(private elem : ElementRef, private router: Router) { }
 
   randomizeNum(max: number) {
     return Math.floor(Math.random() * max);
@@ -166,16 +167,6 @@ export class PazaakBoardComponent implements OnInit {
     this.playerTurn = false;
     alert("Player stands. Keep pressing End Turn until the round is over.");
     this.checkPlayerWinWithStand();
-    // if (this.playerPazaakVal < this.computerPazaakVal && this.computerPazaakVal <= 20) {
-    //   alert("Computer wins!");
-    //   this.restartGame();
-    // } else if (this.playerPazaakVal > this.computerPazaakVal && this.playerPazaakVal <= 20) {
-    //   alert("Player wins!");
-    //   this.restartGame();
-    // } else if (this.playerPazaakVal > 20) {
-    //   alert("Player loses!");
-    //   this.restartGame();
-    // }
   }
 
   playerAutoStands(): void {
@@ -188,7 +179,12 @@ export class PazaakBoardComponent implements OnInit {
     this.computerTurn = false;
   }
 
-  restartRound() {
+  quitGame(): void {
+    alert("Quitting game and retuning to main menu...");
+    this.router.navigate(['']);
+  }
+
+  restartRound(): void {
     this.playerGrid = [];
     this.computerGrid = [];
     this.playerPazaakVal = 0;
@@ -196,7 +192,7 @@ export class PazaakBoardComponent implements OnInit {
     this.playerStand = false;
   }
 
-  restartGame() {
+  restartGame(): void {
     this.restartRound();
     this.playerRoundWins = 0;
     this.computerRoundWins = 0;
@@ -211,7 +207,6 @@ export class PazaakBoardComponent implements OnInit {
 
     console.log(this.playerHand);
     console.log(this.computerHand);
-
   }
 
   checkComputerRoundWins(): void {
