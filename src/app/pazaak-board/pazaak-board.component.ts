@@ -153,20 +153,28 @@ export class PazaakBoardComponent implements OnInit {
     this.randomComputerIndex = this.randomizeNum(this.mainDeck.length);
     this.randomComputerNum = this.mainDeck[this.randomComputerIndex];
     
-    if (this.mainDeck.length === 0) {
-      alert("No more cards, main deck has been reset. Press the End Turn button again to resume");
-      this.mainDeck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10];
+    if (this.gameStarted === false) {
+      alert("Game has not started. Please start the game before using this button.");
     } else {
-      this.generateGivenCards();
+      if (this.mainDeck.length === 0) {
+        alert("No more cards, main deck has been reset. Press the End Turn button again to resume");
+        this.mainDeck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10];
+      } else {
+        this.generateGivenCards();
+      }
     }
     // console.log(this.mainDeck);
   }
 
   playerStands(): void {
-    this.playerStand = true;
-    this.playerTurn = false;
-    alert("Player stands. Keep pressing End Turn until the round is over.");
-    this.checkPlayerWinWithStand();
+    if (this.gameStarted === false) {
+      alert("Game has not started. Please start the game before using this button.");
+    } else {
+      this.playerStand = true;
+      this.playerTurn = false;
+      alert("Player stands. Keep pressing End Turn until the round is over.");
+      this.checkPlayerWinWithStand();
+    }
   }
 
   playerAutoStands(): void {
