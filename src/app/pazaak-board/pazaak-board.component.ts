@@ -97,8 +97,8 @@ export class PazaakBoardComponent implements OnInit {
       if (this.playerPazaakVal > 20) {
             // alert("Your value is over 20. Sorry, you lose! Decrease it with a negative card next time.");
             alert("Player busts. Computer wins the round!");
-            this.checkComputerRoundWins();
             this.restartRound();
+            this.checkComputerRoundWins();
       } else {
         if (this.playerStand === false) {
           setTimeout(() => {
@@ -121,10 +121,10 @@ export class PazaakBoardComponent implements OnInit {
     } else {
       if (this.playerGrid.length === 9) {
         alert("Player wins the round!");
-        this.checkPlayerRoundWins();
         this.playerGrid = [];
         this.computerGrid = [];
         this.startGame();
+        this.checkPlayerRoundWins();
       }
     }
   }
@@ -200,23 +200,43 @@ export class PazaakBoardComponent implements OnInit {
     this.restartRound();
     this.playerRoundWins = 0;
     this.computerRoundWins = 0;
+    this.playerHand = [];
+    this.computerHand = [];
+    for (let i = 0; i < 4; i++) {
+      this.playerHand.push(this.randomizePlayerCardsNum());
+      this.computerHand.push(this.randomizePlayerCardsNum());
+    }
+
+    this.checkCardColors();
+
+    console.log(this.playerHand);
+    console.log(this.computerHand);
+
   }
 
   checkComputerRoundWins(): void {
-    if (this.computerRoundWins !== 3) {
+    if (this.computerRoundWins === 2) {
       this.computerRoundWins++;
+      setTimeout(() => {
+        alert("Computer has won all three rounds. Therefore, Computer has won the game!");
+        this.restartGame();
+      }, 1000);
     } else {
-      alert("Computer has won all three rounds. Therefore, it has won the game!");
-      this.restartGame();
+      this.computerRoundWins++;
+      console.log("computerRoundWins: ", this.computerRoundWins);
     }
   }
 
   checkPlayerRoundWins(): void {
-    if (this.playerRoundWins !== 3) {
+    if (this.playerRoundWins === 2) {
       this.playerRoundWins++;
+      setTimeout(() => {
+        alert("Player has won all three rounds. Therefore, Player has won the game!");
+        this.restartGame();
+      }, 1000);
     } else {
-      alert("Player has won all three rounds. Therefore, it has won the game!");
-      this.restartGame();
+      this.playerRoundWins++;
+      console.log("playerRoundWins: ", this.playerRoundWins);
     }
   }
 
@@ -225,8 +245,8 @@ export class PazaakBoardComponent implements OnInit {
       setTimeout(() => {
         this.computerAutoStands();
         alert("Computer busts. Player wins the round!");
-        this.checkPlayerRoundWins();
         this.restartRound();
+        this.checkPlayerRoundWins();
       }, 500);
     } else if (this.computerPazaakVal === 20) {
       setTimeout(() => {
@@ -237,8 +257,8 @@ export class PazaakBoardComponent implements OnInit {
 
         if (this.playerStand && this.computerStand && this.playerPazaakVal < this.computerPazaakVal) {
           alert("Computer wins the round!");
-          this.checkComputerRoundWins();
           this.restartRound();
+          this.checkComputerRoundWins();
         }
       }, 500);
     }
@@ -275,16 +295,16 @@ export class PazaakBoardComponent implements OnInit {
     if (this.playerPazaakVal > 20 && this.playerStand) {
       setTimeout(() => {
         alert("Player busts. Computer wins the round!");
-        this.checkComputerRoundWins();
         this.restartRound();
         this.startGame();
+        this.checkComputerRoundWins();
       }, 500);
     } else if (this.playerPazaakVal < 20 && this.playerPazaakVal < this.computerPazaakVal && this.playerStand) {
       setTimeout(() => {
         alert("Computer wins the round!");
-        this.checkComputerRoundWins();
         this.restartRound();
         this.startGame();
+        this.checkComputerRoundWins();
       }, 500);
     } else if (this.computerPazaakVal === 20 && this.playerPazaakVal === 20 && this.playerStand && this.computerStand) {
       setTimeout(() => {
