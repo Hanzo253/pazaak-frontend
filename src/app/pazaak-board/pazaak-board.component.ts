@@ -14,9 +14,10 @@ export class PazaakBoardComponent implements OnInit {
 
   mainDeck: Array<number> = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10];
 
-  sideDeck: Array<number> = [-1, 1, -2, 2, -3, 3, -4, 4, -5, 5, -6, 6];
+  sideDeck: Array<number> = [1, 2, 3, 4, 5, 6];
+  // sideDeck: Array<number> = [-1, 1, -2, 2, -3, 3, -4, 4, -5, 5, -6, 6];
 
-  playerHand: Array<number> = [];
+  playerHand: Array<any> = [];
   computerHand: Array<number> = [];
 
   playerStand: boolean = false;
@@ -176,6 +177,56 @@ export class PazaakBoardComponent implements OnInit {
     this.computerPazaakVal = 0;
   }
 
+  checkCardColors(): void {
+    switch (this.cardOneColor) {
+      case "positive":
+        this.playerHand[0] = Math.abs(this.playerHand[0]);
+        break;
+      case "negative":
+        this.playerHand[0] = this.playerHand[0] * -1;
+        break;
+      case "hybrid":
+        this.playerHand[0] = "±" + this.playerHand[0];
+        break;
+    }
+
+    switch (this.cardTwoColor) {
+      case "positive":
+        this.playerHand[1] = Math.abs(this.playerHand[1]);
+        break;
+      case "negative":
+        this.playerHand[1] = this.playerHand[1] * -1;
+        break;
+      case "hybrid":
+        this.playerHand[1] = "±" + this.playerHand[1];
+        break;
+    }
+
+    switch (this.cardThreeColor) {
+      case "positive":
+        this.playerHand[2] = Math.abs(this.playerHand[2]);
+        break;
+      case "negative":
+        this.playerHand[2] = this.playerHand[2] * -1;
+        break;
+      case "hybrid":
+        this.playerHand[2] = "±" + this.playerHand[2];
+        break;
+    }
+
+    switch (this.cardFourColor) {
+      case "positive":
+        this.playerHand[3] = Math.abs(this.playerHand[3]);
+        break;
+      case "negative":
+        this.playerHand[3] = this.playerHand[3] * -1;
+        break;
+      case "hybrid":
+        this.playerHand[3] = "±" + this.playerHand[3];
+        break;
+    }
+  }
+
   ngOnInit(): void {
     this.cardOneColor = this.randomizeColorClass(); 
     this.cardTwoColor = this.randomizeColorClass(); 
@@ -187,7 +238,9 @@ export class PazaakBoardComponent implements OnInit {
       this.computerHand.push(this.randomizePlayerCardsNum());
     }
 
-    // console.log(this.playerHand);
+    this.checkCardColors();
+
+    console.log(this.playerHand);
   }
 
 }
