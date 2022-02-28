@@ -9,14 +9,21 @@ Font sizes (px):
 */
 
 .match-history {
-  height: 25vh;
+  height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .heading {
   font-size: 5rem;
   color: #ffd43b;
   text-align: center;
+  margin: 5rem auto;
+}
+
+.matches {
+  width: 50%;
+  margin: 0 auto;
 }
