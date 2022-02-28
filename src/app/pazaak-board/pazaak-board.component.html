@@ -139,25 +139,25 @@
     <aside class="computer-hand">
       <div
         class="card unknown"
-        [ngClass]="{ disable: computerHand.length === 0 }"
+        [ngClass]="{ disable: computerHand.length <= 0 }"
       >
         <h3 class="number">?</h3>
       </div>
       <div
         class="card unknown"
-        [ngClass]="{ disable: computerHand.length === 1 }"
+        [ngClass]="{ disable: computerHand.length <= 1 }"
       >
         <h3 class="number">?</h3>
       </div>
       <div
         class="card unknown"
-        [ngClass]="{ disable: computerHand.length === 2 }"
+        [ngClass]="{ disable: computerHand.length <= 2 }"
       >
         <h3 class="number">?</h3>
       </div>
       <div
         class="card unknown"
-        [ngClass]="{ disable: computerHand.length === 3 }"
+        [ngClass]="{ disable: computerHand.length <= 3 }"
       >
         <h3 class="number">?</h3>
       </div>
