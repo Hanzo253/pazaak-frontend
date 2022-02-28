@@ -7,6 +7,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { PazaakBoardComponent } from './pazaak-board/pazaak-board.component';
 import { StartGameDirective } from './start-game.directive';
 import { HideCardDirective } from './hide-card.directive';
+import { MatchHistoryComponent } from './match-history/match-history.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HideCardDirective } from './hide-card.directive';
     MainMenuComponent,
     PazaakBoardComponent,
     StartGameDirective,
-    HideCardDirective
+    HideCardDirective,
+    MatchHistoryComponent
   ],
   imports: [
     BrowserModule,
