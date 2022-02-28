@@ -67,29 +67,7 @@ export class PazaakBoardComponent implements OnInit {
     return this.sideDeck[this.randomComputerCardNumIndex];
   }
 
-  startGame(): void {
-    this.randomPlayerIndex = this.randomizeNum(this.mainDeck.length);
-    this.randomPlayerNum = this.mainDeck[this.randomPlayerIndex];
-    this.playerGrid.push(this.randomPlayerNum);
-    console.log("Start Button here");
-    this.mainDeck.splice(this.randomPlayerIndex, 1);
-    this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
-    this.gameStarted = true;
-    this.playerTurn = true;
-    this.computerTurn = false;
-  }
-
-  endTurn(): void {
-    this.randomPlayerIndex = this.randomizeNum(this.mainDeck.length);
-    this.randomPlayerNum = this.mainDeck[this.randomPlayerIndex];
-    this.randomComputerIndex = this.randomizeNum(this.mainDeck.length);
-    this.randomComputerNum = this.mainDeck[this.randomComputerIndex];
-    
-    if (this.mainDeck.length === 0) {
-      alert("No more cards, main deck has been reset.");
-      this.mainDeck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10];
-    }
-
+  generateGivenCards(): void {
     if (this.playerGrid.length < 9) {
       setTimeout(() => {
         if (this.computerPazaakVal < 20) {
@@ -114,9 +92,6 @@ export class PazaakBoardComponent implements OnInit {
       setTimeout(() => {
         if (this.playerPazaakVal < 20) {
           this.playerGrid.push(this.randomPlayerNum);
-          console.log("End turn button here");
-          
-          console.log(this.playerGrid);
           this.mainDeck.splice(this.randomPlayerIndex, 1);
           this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
           if (this.playerPazaakVal > 20) {
@@ -136,10 +111,6 @@ export class PazaakBoardComponent implements OnInit {
         this.playerTurn = true;
         this.computerTurn = false;
       }, 1500);
-      // this.computerGrid.push(this.randomComputerNum);
-      // this.mainDeck.splice(this.randomComputerIndex, 1);
-      // this.playerGrid.push(this.randomPlayerNum);
-      // this.mainDeck.splice(this.randomPlayerIndex, 1);
     } else {
       if (this.playerGrid.length === 9) {
         alert("Player wins!");
@@ -148,7 +119,32 @@ export class PazaakBoardComponent implements OnInit {
         this.startGame();
       }
     }
+  }
+
+  startGame(): void {
+    this.randomPlayerIndex = this.randomizeNum(this.mainDeck.length);
+    this.randomPlayerNum = this.mainDeck[this.randomPlayerIndex];
+    this.playerGrid.push(this.randomPlayerNum);
+    this.mainDeck.splice(this.randomPlayerIndex, 1);
+    this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
+    this.gameStarted = true;
+    this.playerTurn = true;
+    this.computerTurn = false;
+  }
+
+  endTurn(): void {
+    this.randomPlayerIndex = this.randomizeNum(this.mainDeck.length);
+    this.randomPlayerNum = this.mainDeck[this.randomPlayerIndex];
+    this.randomComputerIndex = this.randomizeNum(this.mainDeck.length);
+    this.randomComputerNum = this.mainDeck[this.randomComputerIndex];
     
+    if (this.mainDeck.length === 0) {
+      alert("No more cards, main deck has been reset. Press the End Turn button again to resume");
+      this.mainDeck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10];
+    } else {
+      this.generateGivenCards();
+    }
+    console.log(this.mainDeck);
   }
 
   playerStands(): void {
