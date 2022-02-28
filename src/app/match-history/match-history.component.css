@@ -9,5 +9,14 @@ Font sizes (px):
 */
 
 .match-history {
-  height: 100vh;
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  font-size: 5rem;
+  color: #ffd43b;
+  text-align: center;
 }

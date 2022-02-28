@@ -8,6 +8,7 @@ import { PazaakBoardComponent } from './pazaak-board/pazaak-board.component';
 import { StartGameDirective } from './start-game.directive';
 import { HideCardDirective } from './hide-card.directive';
 import { MatchHistoryComponent } from './match-history/match-history.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
