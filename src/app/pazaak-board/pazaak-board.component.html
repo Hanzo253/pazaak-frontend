@@ -9,9 +9,18 @@
     />
     <p class="username">Luke Skywalker</p>
     <ul class="rounds">
-      <li class="round"></li>
-      <li class="round"></li>
-      <li class="round"></li>
+      <li
+        class="round"
+        [ngClass]="{ 'round-win-player': playerRoundWins >= 1 }"
+      ></li>
+      <li
+        class="round"
+        [ngClass]="{ 'round-win-player': playerRoundWins >= 2 }"
+      ></li>
+      <li
+        class="round"
+        [ngClass]="{ 'round-win-player': playerRoundWins >= 3 }"
+      ></li>
     </ul>
     <strong class="player-hand-text">Player's Hand</strong>
     <aside class="player-hand" [ngClass]="playerStand ? 'player-stands' : ''">
@@ -113,9 +122,18 @@
     />
     <p class="computer-name">Darth Vader</p>
     <ul class="rounds">
-      <li class="round"></li>
-      <li class="round"></li>
-      <li class="round"></li>
+      <li
+        class="round"
+        [ngClass]="{ 'round-win-computer': computerRoundWins >= 1 }"
+      ></li>
+      <li
+        class="round"
+        [ngClass]="{ 'round-win-computer': computerRoundWins >= 2 }"
+      ></li>
+      <li
+        class="round"
+        [ngClass]="{ 'round-win-computer': computerRoundWins >= 3 }"
+      ></li>
     </ul>
     <strong class="computer-hand-text">Computer's Hand</strong>
     <aside class="computer-hand">
