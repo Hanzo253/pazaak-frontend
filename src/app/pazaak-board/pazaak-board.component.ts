@@ -49,7 +49,6 @@ export class PazaakBoardComponent implements OnInit {
   computerTurn: boolean = false;
 
   cardsGone: any;
-  pazaakSong: any = new Audio();
 
   constructor(private elem : ElementRef, private router: Router) { }
 
@@ -200,8 +199,6 @@ export class PazaakBoardComponent implements OnInit {
 
   quitGame(): void {
     alert("Quitting game and retuning to main menu...");
-    this.pazaakSong.pause();
-    this.pazaakSong.currentTime = 0;
     this.router.navigate(['']);
   }
 
@@ -619,10 +616,6 @@ export class PazaakBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pazaakSong.src = "../../assets/music/pazaak.mp3";
-    this.pazaakSong.play();
-    this.pazaakSong.loop = true;
-
     this.cardOneColor = this.randomizeColorClass(); 
     this.cardTwoColor = this.randomizeColorClass(); 
     this.cardThreeColor = this.randomizeColorClass(); 
