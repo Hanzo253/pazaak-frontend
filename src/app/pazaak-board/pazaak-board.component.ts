@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-pazaak-board',
@@ -49,8 +50,9 @@ export class PazaakBoardComponent implements OnInit {
   computerTurn: boolean = false;
 
   cardsGone: any;
+  pazaakSong: any = new Audio();
 
-  constructor(private elem : ElementRef, private router: Router) { }
+  constructor(private elem : ElementRef, private router: Router, private menuService: MenuService) { }
 
   randomizeNum(max: number) {
     return Math.floor(Math.random() * max);
@@ -199,6 +201,8 @@ export class PazaakBoardComponent implements OnInit {
 
   quitGame(): void {
     alert("Quitting game and retuning to main menu...");
+    this.pazaakSong.pause();
+    this.pazaakSong.currentTime = 0;
     this.router.navigate(['']);
   }
 
@@ -616,6 +620,7 @@ export class PazaakBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.menuService.stopCantinaSong();
     this.cardOneColor = this.randomizeColorClass(); 
     this.cardTwoColor = this.randomizeColorClass(); 
     this.cardThreeColor = this.randomizeColorClass(); 
@@ -630,6 +635,10 @@ export class PazaakBoardComponent implements OnInit {
 
     console.log(this.playerHand);
     console.log(this.computerHand);
+
+    this.pazaakSong.src = "../../assets/music/pazaak.mp3";
+    this.pazaakSong.play();
+    this.pazaakSong.loop = true;
 
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-match-history',
@@ -8,7 +9,11 @@ import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MatchHistoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private menuService: MenuService) { }
+
+  returnMainMenu() {
+    this.menuService.toggleShowBand();
+  }
 
   ngOnInit(): void {
   }

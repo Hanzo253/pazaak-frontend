@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'match-history',
     component: MatchHistoryComponent
-  },
+  }
 ];
 
 @NgModule({

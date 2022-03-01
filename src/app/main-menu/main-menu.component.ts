@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -7,16 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuComponent implements OnInit {
 
-  bandPlaying: any;
+  bandPlaying: any = this.menuService.getBandPlaying();
   cantinaSong: any = new Audio();
 
-  constructor() { }
+  constructor(private menuService: MenuService) { }
 
   playBand(): void {
     this.bandPlaying = true;
     this.cantinaSong.src = "../../assets/music/cantina-song.mp3";
+    this.cantinaSong.muted = false;
     this.cantinaSong.play();
     this.cantinaSong.loop = true;
+
   }
 
   playGame(): void {
@@ -32,6 +35,9 @@ export class MainMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cantinaSong.src = "../../assets/music/cantina-song.mp3";
+    this.cantinaSong.play();
+    this.cantinaSong.loop = true;
   }
 
 }
