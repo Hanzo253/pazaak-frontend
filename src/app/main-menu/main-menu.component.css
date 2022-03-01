@@ -42,3 +42,14 @@
   margin: 0.5rem;
   color: #f8f9fa;
 }
+
+.cantina-band-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cantina-band {
+  width: 15%;
+  z-index: 2;
+}
