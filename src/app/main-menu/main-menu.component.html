@@ -3,14 +3,27 @@
 </section>
 <section class="menu-section flex-center">
   <ul class="menu">
-    <li class="options" routerLink="/pazaak">
+    <li class="options" routerLink="/pazaak" (click)="playGame()">
       <p class="option">Play Game</p>
     </li>
-    <li class="options">
-      <p class="option">View profile</p>
+    <li class="options" (click)="playBand()">
+      <p class="option">Play Band</p>
     </li>
-    <li class="options" routerLink="/match-history">
+    <!-- <li class="options">
+      <p class="option">View profile</p>
+    </li> -->
+    <li class="options" routerLink="/match-history" (click)="matchHistory()">
       <p class="option">Match History</p>
     </li>
   </ul>
+</section>
+<section
+  class="cantina-band-section"
+  [ngClass]="bandPlaying ? 'show-band' : 'hide-band'"
+>
+  <img
+    src="../../assets/cantina-band.gif"
+    alt="Cantina Band"
+    class="cantina-band"
+  />
 </section>

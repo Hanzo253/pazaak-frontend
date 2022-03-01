@@ -42,7 +42,6 @@
   margin: 0.5rem;
   color: #f8f9fa;
 }
-<<<<<<< HEAD
 
 .cantina-band-section {
   display: flex;
@@ -51,8 +50,27 @@
 }
 
 .cantina-band {
-  width: 15%;
+  width: 20%;
   z-index: 2;
 }
-=======
->>>>>>> parent of 02dcc98 (added pazaak song and cantina band)
+
+.show-band {
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.5s;
+}
+
+.hide-band {
+  display: none;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

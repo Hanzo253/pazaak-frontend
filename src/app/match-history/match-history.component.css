@@ -27,3 +27,20 @@ Font sizes (px):
   width: 50%;
   margin: 0 auto;
 }
+
+.return-main {
+  margin: 1rem auto;
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border: 4mm ridge #1864ab;
+  background-color: #111315;
+  color: #f8f9fa;
+  z-index: 1;
+}
+
+.return-main:hover {
+  background-color: #339af0;
+}
