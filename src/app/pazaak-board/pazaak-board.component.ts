@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-pazaak-board',
@@ -52,7 +51,7 @@ export class PazaakBoardComponent implements OnInit {
   cardsGone: any;
   pazaakSong: any = new Audio();
 
-  constructor(private elem : ElementRef, private router: Router, private menuService: MenuService) { }
+  constructor(private elem : ElementRef, private router: Router) { }
 
   randomizeNum(max: number) {
     return Math.floor(Math.random() * max);
@@ -620,7 +619,6 @@ export class PazaakBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.menuService.stopCantinaSong();
     this.cardOneColor = this.randomizeColorClass(); 
     this.cardTwoColor = this.randomizeColorClass(); 
     this.cardThreeColor = this.randomizeColorClass(); 
