@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './interface/user';
 import { UserService } from './services/user.service';
+import { MatchService } from './services/match.service';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +15,21 @@ export class AppComponent implements OnInit {
   //   'emailAddress' : 'jedimaster@yahoo.com',
   //   'password' : 'kenobi'
   // }
-  constructor(private userService: UserService) { }
 
-  // registerUser(user: any) {
-  //   this.userService.register(user).subscribe(
-  //     (response) => console.log(response)
-  //   );
-  // }
+  private match: any = {
+    'result' : 'Victory',
+    'matchDate' : '12-05-2022'
+  }
+
+  authToken: any = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWRpbWFzdGVyQHlhaG9vLmNvbSIsImV4cCI6MTY0NjIzNTU5NCwiaWF0IjoxNjQ2MTk5NTk0fQ.0HD-UDXKRKFr1zui031GcT7SORI804agTAFQEsQFcMs"
+
+  constructor(private userService: UserService, private matchService: MatchService) { }
+
+  registerUser(user: any) {
+    this.userService.register(user).subscribe(
+      (response) => console.log(response)
+    );
+  }
 
   listUsers(): void {
     this.userService.listUsers().subscribe(
@@ -40,10 +49,25 @@ export class AppComponent implements OnInit {
     );
   }
 
+  createMatch(match: any, authToken: any) {
+    this.matchService.createMatch(match, authToken).subscribe(
+      (response) => console.log(response)
+    );
+  }
+
+  getAllMatches(authToken: any) {
+    this.matchService.getAllMatches(authToken).subscribe(
+      (response) => console.log(response)
+    );
+  }
+
   ngOnInit(): void {
       // this.listUsers();
       // this.getUser();
       // this.getLoggedInUser("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaXRobG9yZEB5YWhvby5jb20iLCJleHAiOjE2NDYyMjEzOTcsImlhdCI6MTY0NjE4NTM5N30._Hmc4bm6AiU7SoF_9iDtGSxzbDyQZOlTA0B-FFaBUfc");
       // this.registerUser(this.user);
+
+      // this.createMatch(this.match, this.authToken);
+      // this.getAllMatches(this.authToken);
   }
 }

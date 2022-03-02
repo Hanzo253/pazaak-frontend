@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../interface/user';
 import { UserService } from '../services/user.service';
+import { MatchService } from '../services/match.service';
 
 @Component({
   selector: 'app-pazaak-board',
@@ -9,6 +10,11 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./pazaak-board.component.css']
 })
 export class PazaakBoardComponent implements OnInit {
+
+  match: any = {
+    'result' : 'Victory',
+    'matchDate' : '12-05-2022'
+  }
 
   gameStarted: boolean = false;
   playerRoundWins: number = 0;
@@ -71,7 +77,7 @@ export class PazaakBoardComponent implements OnInit {
   clickedCardThree: boolean = false;
   clickedCardFour: boolean = false;
 
-  constructor(private elem : ElementRef, private router: Router, private userService: UserService) { }
+  constructor(private elem : ElementRef, private router: Router, private userService: UserService, private matchService: MatchService) { }
 
   randomizeNum(max: number) {
     return Math.floor(Math.random() * max);
@@ -690,8 +696,15 @@ export class PazaakBoardComponent implements OnInit {
     );
   }
 
+  createMatch(match: any, authToken: any) {
+    this.matchService.createMatch(match, authToken).subscribe(
+      (response) => console.log(response)
+    );
+  }
+
   ngOnInit(): void {
     this.getLoggedInUser(this.userAuthToken);
+    // this.createMatch(this.match, this.userAuthToken);
 
     this.cardOneColor = this.randomizeColorClass(); 
     this.cardTwoColor = this.randomizeColorClass(); 

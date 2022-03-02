@@ -28,6 +28,34 @@ Font sizes (px):
   margin: 0 auto;
 }
 
+.match-info,
+.match-info-headings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.match-info-headings {
+  text-decoration: underline;
+  font-size: 1.5rem;
+}
+
+.match-info {
+  font-size: 1rem;
+}
+
+.match-id-heading,
+.result-heading,
+.match-date-heading {
+  margin: 1rem auto;
+}
+
+.match-id,
+.result,
+.match-date {
+  margin: 1rem auto;
+}
+
 .return-main {
   margin: 1rem auto;
   padding: 0.5rem;
