@@ -179,11 +179,13 @@ Font sizes (px):
 }
 
 .positive {
+  display: flex;
   background-color: #135089;
   cursor: pointer;
 }
 
 .negative {
+  display: flex;
   background-color: #c92a2a;
   cursor: pointer;
 }

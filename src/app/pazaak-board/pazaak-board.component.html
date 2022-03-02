@@ -33,7 +33,7 @@
       >
         <h3 class="number">-1</h3>
       </div> -->
-      <div
+      <!-- <div
         class="card"
         [ngClass]="!gameStarted ? cardOneColor + ' disable' : cardOneColor"
         (click)="addCardToGridPlayer(playerHand[0])"
@@ -64,19 +64,69 @@
         appHideCard
       >
         <h3 class="number">{{ playerHand[3] }}</h3>
-      </div>
-      <!-- <div class="card" [ngClass]="gameStarted ? 'hide-card' : ''">
-        <h3 class="number">-1</h3>
-      </div>
-      <div class="card" [ngClass]="gameStarted ? 'hide-card' : ''">
-        <h3 class="number">+1</h3>
-      </div>
-      <div class="card" [ngClass]="gameStarted ? 'hide-card' : ''">
-        <h3 class="number">+1</h3>
-      </div>
-      <div class="card" [ngClass]="gameStarted ? 'hide-card' : ''">
-        <h3 class="number">+1</h3>
       </div> -->
+      <!-- <div
+        class="card"
+        [ngClass]="!gameStarted ? cardOneColor + ' disable' : cardOneColor"
+        (click)="addCardToGridPlayer(playerHand[0])"
+        appHideCard
+      >
+        <h3 class="number">{{ playerHand[0] }}</h3>
+      </div>
+      <div
+        class="card"
+        [ngClass]="!gameStarted ? cardTwoColor + ' disable' : cardTwoColor"
+        (click)="addCardToGridPlayer(playerHand[1])"
+        appHideCard
+      >
+        <h3 class="number">{{ playerHand[1] }}</h3>
+      </div>
+      <div
+        class="card"
+        [ngClass]="!gameStarted ? cardThreeColor + ' disable' : cardThreeColor"
+        (click)="addCardToGridPlayer(playerHand[2])"
+        appHideCard
+      >
+        <h3 class="number">{{ playerHand[2] }}</h3>
+      </div>
+      <div
+        class="card"
+        [ngClass]="!gameStarted ? cardFourColor + ' disable' : cardFourColor"
+        (click)="addCardToGridPlayer(playerHand[3])"
+        appHideCard
+      >
+        <h3 class="number">{{ playerHand[3] }}</h3>
+      </div> -->
+      <div
+        class="card"
+        [ngClass]="clickedCardOne ? cardOneColor + ' disable' : cardOneColor"
+        (click)="addCardToGridPlayer(playerHand[0])"
+      >
+        <h3 class="number">{{ playerHand[0] }}</h3>
+      </div>
+      <div
+        class="card"
+        [ngClass]="clickedCardTwo ? cardTwoColor + ' disable' : cardTwoColor"
+        (click)="addCardToGridPlayer(playerHand[1])"
+      >
+        <h3 class="number">{{ playerHand[1] }}</h3>
+      </div>
+      <div
+        class="card"
+        [ngClass]="
+          clickedCardThree ? cardThreeColor + ' disable' : cardThreeColor
+        "
+        (click)="addCardToGridPlayer(playerHand[2])"
+      >
+        <h3 class="number">{{ playerHand[2] }}</h3>
+      </div>
+      <div
+        class="card"
+        [ngClass]="clickedCardFour ? cardFourColor + ' disable' : cardFourColor"
+        (click)="addCardToGridPlayer(playerHand[3])"
+      >
+        <h3 class="number">{{ playerHand[3] }}</h3>
+      </div>
     </aside>
     <div class="player-buttons" [ngClass]="cardsGone ? 'cards-gone' : ''">
       <button class="game-btn start-game" (click)="startGame()" appStartGame>

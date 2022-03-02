@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from './interface/user';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -8,8 +9,18 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit {
   title = 'pazaak-frontend';
-
+  // private user: any = {
+  //   'userName' : 'ObiWan253',
+  //   'emailAddress' : 'jedimaster@yahoo.com',
+  //   'password' : 'kenobi'
+  // }
   constructor(private userService: UserService) { }
+
+  // registerUser(user: any) {
+  //   this.userService.register(user).subscribe(
+  //     (response) => console.log(response)
+  //   );
+  // }
 
   listUsers(): void {
     this.userService.listUsers().subscribe(
@@ -32,6 +43,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
       // this.listUsers();
       // this.getUser();
-      this.getLoggedInUser("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaXRobG9yZEB5YWhvby5jb20iLCJleHAiOjE2NDYyMjEzOTcsImlhdCI6MTY0NjE4NTM5N30._Hmc4bm6AiU7SoF_9iDtGSxzbDyQZOlTA0B-FFaBUfc");
+      // this.getLoggedInUser("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaXRobG9yZEB5YWhvby5jb20iLCJleHAiOjE2NDYyMjEzOTcsImlhdCI6MTY0NjE4NTM5N30._Hmc4bm6AiU7SoF_9iDtGSxzbDyQZOlTA0B-FFaBUfc");
+      // this.registerUser(this.user);
   }
 }

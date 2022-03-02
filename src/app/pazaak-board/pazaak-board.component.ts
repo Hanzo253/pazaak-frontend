@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../interface/user';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -49,12 +50,26 @@ export class PazaakBoardComponent implements OnInit {
   playerTurn: boolean = false;
   computerTurn: boolean = false;
 
+  userAuthToken: any = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaXRobG9yZEB5YWhvby5jb20iLCJleHAiOjE2NDYyMjQ2MTYsImlhdCI6MTY0NjE4ODYxNn0.dWQ3T1U2w76XstB6UYg1oKrqwM7NJf6Ak7SBzfXOVjE"
   playerName: any;
-  playerWins: any;
-  playerLosses: any;
+  playerWins: number = 0;
+  playerLosses: number = 0;
+  
+  updatedWins: any = {
+    'wins' : `${this.playerWins}`
+  };
+
+  updatedLosses: any = {
+    'losses' : `${this.playerLosses}`
+  };
 
   cardsGone: any;
   pazaakSong: any = new Audio();
+
+  clickedCardOne: boolean = false;
+  clickedCardTwo: boolean = false;
+  clickedCardThree: boolean = false;
+  clickedCardFour: boolean = false;
 
   constructor(private elem : ElementRef, private router: Router, private userService: UserService) { }
 
@@ -220,13 +235,17 @@ export class PazaakBoardComponent implements OnInit {
 
   restartGame(): void {
     this.restartRound();
+    this.clickedCardOne = false;
+    this.clickedCardTwo = false;
+    this.clickedCardThree = false;
+    this.clickedCardFour = false;
     this.playerRoundWins = 0;
     this.computerRoundWins = 0;
     this.playerHand = [];
     this.computerHand = [];
     for (let i = 0; i < 4; i++) {
       this.playerHand.push(this.randomizePlayerCardsNum());
-      this.computerHand.push(this.randomizePlayerCardsNum());
+      this.computerHand.push(this.randomizeComputerCardsNum());
     }
 
     this.checkCardColors();
@@ -239,8 +258,15 @@ export class PazaakBoardComponent implements OnInit {
     if (this.computerRoundWins === 2) {
       this.computerRoundWins++;
       setTimeout(() => {
+        this.playerLosses++;
+        console.log(this.playerLosses);
+        this.updatedLosses = {
+          'losses' : `${this.playerLosses}`
+        };
+        this.updateLoss(this.updatedLosses, this.userAuthToken);
         alert("Computer has won all three rounds. Therefore, Computer has won the game!");
         this.restartGame();
+
       }, 1000);
     } else {
       this.computerRoundWins++;
@@ -252,6 +278,12 @@ export class PazaakBoardComponent implements OnInit {
     if (this.playerRoundWins === 2) {
       this.playerRoundWins++;
       setTimeout(() => {
+        this.playerWins++;
+        console.log(this.playerWins);
+        this.updatedWins = {
+          'wins' : `${this.playerLosses}`
+        };
+        this.updateWin(this.updatedWins, this.userAuthToken);
         alert("Player has won all three rounds. Therefore, Player has won the game!");
         this.restartGame();
       }, 1000);
@@ -377,17 +409,25 @@ export class PazaakBoardComponent implements OnInit {
 
   addCardToGridPlayer(cardNum: number): void {
     if (this.gameStarted) {
+      switch (cardNum) {
+        case this.playerHand[0]:
+          this.clickedCardOne = true;
+          break;
+        case this.playerHand[1]:
+          this.clickedCardTwo = true;
+          break;
+        case this.playerHand[2]:
+          this.clickedCardThree = true;
+          break;
+        case this.playerHand[3]:
+          this.clickedCardFour = true;
+          break;
+      }
       this.playerGrid.push(cardNum);
       this.playerPazaakVal = this.playerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
       this.checkPlayerWin();
-    }
-  }
-
-  addCardToGridComputer(cardNum: number): void {
-    if (this.gameStarted) {
-      this.computerGrid.push(cardNum);
-      this.computerPazaakVal = this.computerGrid.reduce((valTotal, cardNum) => valTotal + cardNum, 0);
-      this.checkComputerWin();
+    } else {
+      alert("Game has not started yet. Please start the game before playing the card.")
     }
   }
 
@@ -623,26 +663,35 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
-  listUsers(): void {
-    this.userService.listUsers().subscribe(
+  getLoggedInUser(authToken: any): void {
+    this.userService.getLoggedInUser(authToken).subscribe(
       (response) => {
         console.log(response);
-        this.playerName = response[0].userName;
-        this.playerWins = response[0].wins;
-        this.playerLosses = response[0].losses;
+        this.playerName = response.userName;
+        this.playerWins = response.wins;
+        this.playerLosses = response.losses;
       }
     );
   }
 
-  getUser(): void {
-    this.userService.getUser().subscribe(
-      (response) => console.log(response)
+  updateWin(wins: any, authToken: any): void {
+    this.userService.updateWins(wins, authToken).subscribe(
+      (response) => {
+        console.log(response);
+      }
+    );
+  }
+
+  updateLoss(losses: any, authToken: any): void {
+    this.userService.updateLosses(losses, authToken).subscribe(
+      (response) => {
+        console.log(response);
+      }
     );
   }
 
   ngOnInit(): void {
-    this.listUsers();
-    this.getUser();
+    this.getLoggedInUser(this.userAuthToken);
 
     this.cardOneColor = this.randomizeColorClass(); 
     this.cardTwoColor = this.randomizeColorClass(); 

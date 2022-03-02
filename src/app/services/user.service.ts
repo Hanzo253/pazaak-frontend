@@ -10,6 +10,10 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  register(user: any): Observable<any> { 
+    return this.http.post(`http://localhost:9092/auth/users/register`, user);
+  }
+
   getLoggedInUser(authToken: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -24,5 +28,21 @@ export class UserService {
 
   getUser(): Observable<User> {
     return this.http.get<User>(`http://localhost:9092/auth/users/DarthRevan253`);
+  }
+
+  updateWins(wins: any, authToken: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    })
+    return this.http.put(`http://localhost:9092/auth/users/wins`, wins, { headers: headers });
+  }
+
+  updateLosses(losses: any, authToken: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    })
+    return this.http.put(`http://localhost:9092/auth/users/losses`, losses, { headers: headers });
   }
 }
