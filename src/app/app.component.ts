@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     'matchDate' : '12-05-2022'
   }
 
-  authToken: any = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWRpbWFzdGVyQHlhaG9vLmNvbSIsImV4cCI6MTY0NjIzNTU5NCwiaWF0IjoxNjQ2MTk5NTk0fQ.0HD-UDXKRKFr1zui031GcT7SORI804agTAFQEsQFcMs"
+  authToken: any = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWRpbWFzdGVyQHlhaG9vLmNvbSIsImV4cCI6MTY0NjI2OTc2MCwiaWF0IjoxNjQ2MjMzNzYwfQ.lt3yi-josk3Dw8mTO3TnPVwwE1i5KvFPkkuctYIYQrM"
 
   constructor(private userService: UserService, private matchService: MatchService) { }
 

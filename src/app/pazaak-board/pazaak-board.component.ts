@@ -11,11 +11,6 @@ import { MatchService } from '../services/match.service';
 })
 export class PazaakBoardComponent implements OnInit {
 
-  match: any = {
-    'result' : 'Victory',
-    'matchDate' : '12-05-2022'
-  }
-
   gameStarted: boolean = false;
   playerRoundWins: number = 0;
   computerRoundWins: number = 0;
@@ -56,7 +51,7 @@ export class PazaakBoardComponent implements OnInit {
   playerTurn: boolean = false;
   computerTurn: boolean = false;
 
-  userAuthToken: any = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaXRobG9yZEB5YWhvby5jb20iLCJleHAiOjE2NDYyMjQ2MTYsImlhdCI6MTY0NjE4ODYxNn0.dWQ3T1U2w76XstB6UYg1oKrqwM7NJf6Ak7SBzfXOVjE"
+  userAuthToken: any = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWRpbWFzdGVyQHlhaG9vLmNvbSIsImV4cCI6MTY0NjI2OTc2MCwiaWF0IjoxNjQ2MjMzNzYwfQ.lt3yi-josk3Dw8mTO3TnPVwwE1i5KvFPkkuctYIYQrM"
   playerName: any;
   playerWins: number = 0;
   playerLosses: number = 0;
@@ -69,6 +64,11 @@ export class PazaakBoardComponent implements OnInit {
     'losses' : `${this.playerLosses}`
   };
 
+  match: any = {
+    'result' : 'Victory',
+    'matchDate' : '12-05-2022'
+  }
+
   cardsGone: any;
   pazaakSong: any = new Audio();
 
@@ -76,6 +76,11 @@ export class PazaakBoardComponent implements OnInit {
   clickedCardTwo: boolean = false;
   clickedCardThree: boolean = false;
   clickedCardFour: boolean = false;
+
+  matchDate: any = new Date();
+  matchDay: any;
+  matchMonth: any;
+  matchYear: any;
 
   constructor(private elem : ElementRef, private router: Router, private userService: UserService, private matchService: MatchService) { }
 
@@ -286,6 +291,11 @@ export class PazaakBoardComponent implements OnInit {
           'losses' : `${this.playerLosses}`
         };
         this.updateLoss(this.updatedLosses, this.userAuthToken);
+        this.match = {
+          'result' : 'Defeat',
+          'matchDate' : `${this.getCurrentDate()}`
+        }
+        this.createMatch(this.match, this.userAuthToken);
         alert("Computer has won all three rounds. Therefore, Computer has won the game!");
         this.restartGame();
 
@@ -307,6 +317,11 @@ export class PazaakBoardComponent implements OnInit {
           'wins' : `${this.playerLosses}`
         };
         this.updateWin(this.updatedWins, this.userAuthToken);
+        this.match = {
+          'result' : 'Victory',
+          'matchDate' : `${this.getCurrentDate()}`
+        }
+        this.createMatch(this.match, this.userAuthToken);
         alert("Player has won all three rounds. Therefore, Player has won the game!");
         this.restartGame();
       }, 1000);
@@ -692,6 +707,16 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // get current date
+  getCurrentDate() {
+    this.matchDay = String(this.matchDate.getDate()).padStart(2, '0');
+    this.matchMonth = String(this.matchDate.getMonth() + 1).padStart(2, '0');
+    this.matchYear = this.matchDate.getFullYear();
+    this.matchDate = this.matchMonth + '/' + this.matchDay + '/' + this.matchYear;
+    return this.matchDate;
+    
+  }
+
   // checks the JWT and gets the user
   getLoggedInUser(authToken: any): void {
     this.userService.getLoggedInUser(authToken).subscribe(
@@ -728,9 +753,17 @@ export class PazaakBoardComponent implements OnInit {
     );
   }
 
+  getAllMatches(authToken: any) {
+    this.matchService.getAllMatches(authToken).subscribe(
+      (response) => console.log(response)
+    );
+  }
+
   ngOnInit(): void {
     this.getLoggedInUser(this.userAuthToken);
     // this.createMatch(this.match, this.userAuthToken);
+
+    // this.getCurrentDate();
 
     // set color of cards
     this.cardOneColor = this.randomizeColorClass(); 

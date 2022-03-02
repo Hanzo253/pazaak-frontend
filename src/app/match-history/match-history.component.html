@@ -2,7 +2,12 @@
   <h1 class="heading">Match History</h1>
   <div class="matches">
     <ngb-accordion [closeOthers]="true">
-      <ngb-panel id="static-1" title="Match 1">
+      <ngb-panel
+        id="static-{{ i + 1 }}"
+        title="Match {{ i + 1 }}"
+        *ngFor="let match of matches; let i = index"
+      >
+        <!-- *ngFor="let _ of playerGrid.constructor(playerGrid.length); let i = index" -->
         <ng-template ngbPanelContent>
           <div class="match-info-headings">
             <strong class="match-id-heading">Match Id</strong>
@@ -10,26 +15,9 @@
             <strong class="match-date-heading">Match Date</strong>
           </div>
           <div class="match-info">
-            <p class="match-id">1</p>
-            <p class="result">Victory</p>
-            <p class="match-date">3/2/2022</p>
-          </div>
-        </ng-template>
-      </ngb-panel>
-      <ngb-panel id="static-2">
-        <ng-template ngbPanelTitle>
-          <span>Match 2</span>
-        </ng-template>
-        <ng-template ngbPanelContent>
-          <div class="match-info-headings">
-            <strong class="match-id-heading">Match Id</strong>
-            <strong class="result-heading">Match Result</strong>
-            <strong class="match-date-heading">Match Date</strong>
-          </div>
-          <div class="match-info">
-            <p class="match-id">2</p>
-            <p class="result">Defeat</p>
-            <p class="match-date">3/2/2022</p>
+            <p class="match-id">{{ match.id }}</p>
+            <p class="result">{{ match.result }}</p>
+            <p class="match-date">{{ match.matchDate }}</p>
           </div>
         </ng-template>
       </ngb-panel>
