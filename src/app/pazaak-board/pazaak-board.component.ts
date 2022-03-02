@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-pazaak-board',
@@ -48,10 +49,14 @@ export class PazaakBoardComponent implements OnInit {
   playerTurn: boolean = false;
   computerTurn: boolean = false;
 
+  playerName: any;
+  playerWins: any;
+  playerLosses: any;
+
   cardsGone: any;
   pazaakSong: any = new Audio();
 
-  constructor(private elem : ElementRef, private router: Router) { }
+  constructor(private elem : ElementRef, private router: Router, private userService: UserService) { }
 
   randomizeNum(max: number) {
     return Math.floor(Math.random() * max);
@@ -618,7 +623,27 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  listUsers(): void {
+    this.userService.listUsers().subscribe(
+      (response) => {
+        console.log(response);
+        this.playerName = response[0].userName;
+        this.playerWins = response[0].wins;
+        this.playerLosses = response[0].losses;
+      }
+    );
+  }
+
+  getUser(): void {
+    this.userService.getUser().subscribe(
+      (response) => console.log(response)
+    );
+  }
+
   ngOnInit(): void {
+    this.listUsers();
+    this.getUser();
+
     this.cardOneColor = this.randomizeColorClass(); 
     this.cardTwoColor = this.randomizeColorClass(); 
     this.cardThreeColor = this.randomizeColorClass(); 
@@ -631,8 +656,8 @@ export class PazaakBoardComponent implements OnInit {
 
     this.checkCardColors();
 
-    console.log(this.playerHand);
-    console.log(this.computerHand);
+    // console.log(this.playerHand);
+    // console.log(this.computerHand);
 
     this.pazaakSong.src = "../../assets/music/pazaak.mp3";
     this.pazaakSong.play();

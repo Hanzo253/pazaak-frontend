@@ -3,11 +3,13 @@
     <strong class="pazaak-value">{{ playerPazaakVal }}</strong>
     <p class="turn-indicator" [ngClass]="playerTurn ? 'turn' : ''"></p>
     <img
-      src="../../assets/LukeSkywalker.jpg"
+      src="../../assets/profilepictures/BenKenobi.jpg"
       alt="player profile image"
       class="profile-img"
     />
-    <p class="username">Luke Skywalker</p>
+    <p class="username">
+      {{ playerName }} (W: {{ playerWins }}, L: {{ playerLosses }})
+    </p>
     <ul class="rounds">
       <li
         class="round"
@@ -120,7 +122,7 @@
       alt="computer profile image"
       class="profile-img"
     />
-    <p class="computer-name">Darth Vader</p>
+    <p class="computer-name">Computer</p>
     <ul class="rounds">
       <li
         class="round"
