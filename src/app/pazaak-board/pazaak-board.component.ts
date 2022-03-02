@@ -79,25 +79,30 @@ export class PazaakBoardComponent implements OnInit {
 
   constructor(private elem : ElementRef, private router: Router, private userService: UserService, private matchService: MatchService) { }
 
+  // random number generator
   randomizeNum(max: number) {
     return Math.floor(Math.random() * max);
   }
 
+  // randomize color classes for random colors
   randomizeColorClass() {
     this.randomColorIndex = this.randomizeNum(this.colorClasses.length);
     return this.colorClasses[this.randomColorIndex];
   }
 
+  // randomize the player card numbers
   randomizePlayerCardsNum() {
     this.randomPlayerCardNumIndex = this.randomizeNum(this.sideDeck.length);
     return this.sideDeck[this.randomPlayerCardNumIndex];
   }
 
+  // randomize the computer card numbers
   randomizeComputerCardsNum() {
     this.randomComputerCardNumIndex = this.randomizeNum(this.sideDeck.length);
     return this.sideDeck[this.randomComputerCardNumIndex];
   }
 
+  // generate a random number card and place it on the grid
   generateGivenCards(): void {
     if (this.playerGrid.length < 9) {
       setTimeout(() => {
@@ -146,6 +151,7 @@ export class PazaakBoardComponent implements OnInit {
       this.checkPlayerWin();
     }
 
+    // if player grid is full
     if (this.playerGrid.length === 8) {
       setTimeout(() => {
         alert("Player wins the round!");
@@ -156,6 +162,7 @@ export class PazaakBoardComponent implements OnInit {
       }, 1500);
     }
 
+    // if computer grid is full
     if (this.computerGrid.length === 8) {
       setTimeout(() => {
         alert("Computer wins the round!");
@@ -167,6 +174,7 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // starts the game
   startGame(): void {
     this.restartRound();
     this.randomPlayerIndex = this.randomizeNum(this.mainDeck.length);
@@ -184,6 +192,7 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // ends the player's turn
   endTurn(): void {
     this.randomPlayerIndex = this.randomizeNum(this.mainDeck.length);
     this.randomPlayerNum = this.mainDeck[this.randomPlayerIndex];
@@ -203,6 +212,7 @@ export class PazaakBoardComponent implements OnInit {
     // console.log(this.mainDeck);
   }
 
+  // player stand button function
   playerStands(): void {
     if (this.gameStarted === false) {
       alert("Game has not started. Please start the game before using this button.");
@@ -214,16 +224,19 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // player automatically stands without pressing the button
   playerAutoStands(): void {
     this.playerStand = true;
     this.playerTurn = false;
   }
 
+  // computer automatically stands when needed
   computerAutoStands(): void {
     this.computerStand = true;
     this.computerTurn = false;
   }
 
+  // quit the game and return to main menu
   quitGame(): void {
     alert("Quitting game and retuning to main menu...");
     this.pazaakSong.pause();
@@ -231,6 +244,7 @@ export class PazaakBoardComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  // restarts a round of the game
   restartRound(): void {
     this.playerGrid = [];
     this.computerGrid = [];
@@ -239,6 +253,7 @@ export class PazaakBoardComponent implements OnInit {
     this.playerStand = false;
   }
 
+  // restarts the whole game including the round wins
   restartGame(): void {
     this.restartRound();
     this.clickedCardOne = false;
@@ -260,6 +275,7 @@ export class PazaakBoardComponent implements OnInit {
     console.log(this.computerHand);
   }
 
+  // checks if the computer has won three rounds
   checkComputerRoundWins(): void {
     if (this.computerRoundWins === 2) {
       this.computerRoundWins++;
@@ -280,6 +296,7 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // checks if the player has won three rounds
   checkPlayerRoundWins(): void {
     if (this.playerRoundWins === 2) {
       this.playerRoundWins++;
@@ -299,6 +316,7 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // checks if the computer has won the round
   checkComputerWin(): void {
     if (this.computerPazaakVal > 20) {
       setTimeout(() => {
@@ -331,6 +349,7 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // checks if the player has won the round
   checkPlayerWin(): void {
     if (this.playerPazaakVal === 20) {
       setTimeout(() => {
@@ -350,6 +369,7 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // checks if the player wins while standing
   checkPlayerWinWithStand(): void {
     if (this.playerPazaakVal > 20 && this.playerStand) {
       setTimeout(() => {
@@ -374,6 +394,7 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // checks the card colors to make sure that the numbers'sign aligns with their color
   checkCardColors(): void {
     switch (this.cardOneColor) {
       case "positive":
@@ -413,6 +434,7 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // function that add a card from the player's hand to the grid
   addCardToGridPlayer(cardNum: number): void {
     if (this.gameStarted) {
       switch (cardNum) {
@@ -437,6 +459,7 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // computer makes a move based on its pazaak value
   computerMoves(): void {
     this.randomComputerHandIndex = this.randomizeNum(this.computerHand.length);
     if (this.computerHand.length !== 0) {
@@ -669,6 +692,7 @@ export class PazaakBoardComponent implements OnInit {
     }
   }
 
+  // checks the JWT and gets the user
   getLoggedInUser(authToken: any): void {
     this.userService.getLoggedInUser(authToken).subscribe(
       (response) => {
@@ -680,6 +704,7 @@ export class PazaakBoardComponent implements OnInit {
     );
   }
 
+  // updates wins value in data base
   updateWin(wins: any, authToken: any): void {
     this.userService.updateWins(wins, authToken).subscribe(
       (response) => {
@@ -688,6 +713,7 @@ export class PazaakBoardComponent implements OnInit {
     );
   }
 
+  // updates losses value in data base
   updateLoss(losses: any, authToken: any): void {
     this.userService.updateLosses(losses, authToken).subscribe(
       (response) => {
@@ -706,6 +732,7 @@ export class PazaakBoardComponent implements OnInit {
     this.getLoggedInUser(this.userAuthToken);
     // this.createMatch(this.match, this.userAuthToken);
 
+    // set color of cards
     this.cardOneColor = this.randomizeColorClass(); 
     this.cardTwoColor = this.randomizeColorClass(); 
     this.cardThreeColor = this.randomizeColorClass(); 
@@ -716,11 +743,13 @@ export class PazaakBoardComponent implements OnInit {
       this.computerHand.push(this.randomizePlayerCardsNum());
     }
 
+    // check numbers to set their signs based on the color of their cards 
     this.checkCardColors();
 
     // console.log(this.playerHand);
     // console.log(this.computerHand);
 
+    // plays the pazaak song
     this.pazaakSong.src = "../../assets/music/pazaak.mp3";
     this.pazaakSong.play();
     this.pazaakSong.loop = true;
