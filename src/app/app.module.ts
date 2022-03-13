@@ -10,6 +10,9 @@ import { HideCardDirective } from './hide-card.directive';
 import { MatchHistoryComponent } from './match-history/match-history.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { HttpClientModule } from '@angular/common/http';
     PazaakBoardComponent,
     StartGameDirective,
     HideCardDirective,
-    MatchHistoryComponent
+    MatchHistoryComponent,
+    HomeComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

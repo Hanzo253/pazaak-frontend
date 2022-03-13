@@ -8,21 +8,13 @@ import { User } from '../interface/user';
 })
 export class UserService {
 
+  userAuthToken: any;
+
   constructor(private http: HttpClient) { }
 
   register(user: any): Observable<any> { 
     return this.http.post(`http://localhost:9092/auth/users/register`, user);
   }
-
-  // login(user: any): Observable<any> { 
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Accept': '*/*',
-  //     'Access-Control-Allow-Headers': 'Content-Type',
-  //     'Access-Control-Expose-Headers': 'x-auth-token, xsrf-token'
-  //   });
-  //   return this.http.post(`http://localhost:9092/auth/users/login`, user, { headers: headers });
-  // }
 
   login(user: any): Observable<any> { 
     return this.http.post(`http://localhost:9092/auth/users/login`, user);
