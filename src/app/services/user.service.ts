@@ -14,11 +14,25 @@ export class UserService {
     return this.http.post(`http://localhost:9092/auth/users/register`, user);
   }
 
+  // login(user: any): Observable<any> { 
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Accept': '*/*',
+  //     'Access-Control-Allow-Headers': 'Content-Type',
+  //     'Access-Control-Expose-Headers': 'x-auth-token, xsrf-token'
+  //   });
+  //   return this.http.post(`http://localhost:9092/auth/users/login`, user, { headers: headers });
+  // }
+
+  login(user: any): Observable<any> { 
+    return this.http.post(`http://localhost:9092/auth/users/login`, user);
+  }
+
   getLoggedInUser(authToken: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${authToken}`
-    })
+    });
     return this.http.get(`http://localhost:9092/auth/users/user`, { headers: headers });
   }
 
@@ -34,7 +48,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${authToken}`
-    })
+    });
     return this.http.put(`http://localhost:9092/auth/users/wins`, wins, { headers: headers });
   }
 
@@ -42,7 +56,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${authToken}`
-    })
+    });
     return this.http.put(`http://localhost:9092/auth/users/losses`, losses, { headers: headers });
   }
 }

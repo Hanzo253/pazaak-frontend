@@ -9,7 +9,7 @@ import { MatchService } from '../services/match.service';
 })
 export class MatchHistoryComponent implements OnInit {
 
-  userAuthToken: any = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoaWdoZ3JvdW5kQHlhaG9vLmNvbSIsImV4cCI6MTY0NjI3ODMwNSwiaWF0IjoxNjQ2MjQyMzA1fQ.YamxoI0G4zrcwjG-Fk9VLDdcJfnZclK-x0H75ZeDDz8"
+  userAuthToken: any = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoaWdoZ3JvdW5kQHlhaG9vLmNvbSIsImV4cCI6MTY0NzAxODQ1NCwiaWF0IjoxNjQ2OTgyNDU0fQ.m9xn_uqgCBMtCvZN86AGjRGgqh7po3MuWcRmprm-f9A"
 
   matches: Array<any> = [];
 

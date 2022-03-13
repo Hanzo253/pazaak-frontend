@@ -1,5 +1,5 @@
 {
-  "/api/*": {
+  "/auth/users": {
     "target": "http://localhost:9092",
     "secure": false
   }
