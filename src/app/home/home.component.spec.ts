@@ -22,4 +22,8 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show homepage heading', () => {
+    expect(fixture.nativeElement.querySelector('.heading')).toBeTruthy();
+  });
 });
