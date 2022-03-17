@@ -26,4 +26,12 @@ describe('HomeComponent', () => {
   it('should show homepage heading', () => {
     expect(fixture.nativeElement.querySelector('.heading')).toBeTruthy();
   });
+
+  it('should show register button', () => {
+    expect(fixture.nativeElement.querySelector('.register')).toBeTruthy();
+  });
+
+  it('should show login button', () => {
+    expect(fixture.nativeElement.querySelector('.login')).toBeTruthy();
+  });
 });

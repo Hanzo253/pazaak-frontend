@@ -22,4 +22,16 @@ describe('RegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show registration heading', () => {
+    expect(fixture.nativeElement.querySelector('.heading')).toBeTruthy();
+  });
+
+  it('should sign up form', () => {
+    expect(fixture.nativeElement.querySelector('.sign-up')).toBeTruthy();
+  });
+
+  it('should show submit button', () => {
+    expect(fixture.nativeElement.querySelector('.submit-btn')).toBeTruthy();
+  });
 });
