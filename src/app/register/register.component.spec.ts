@@ -27,11 +27,15 @@ describe('RegisterComponent', () => {
     expect(fixture.nativeElement.querySelector('.heading')).toBeTruthy();
   });
 
-  it('should sign up form', () => {
+  it('should show sign up form', () => {
     expect(fixture.nativeElement.querySelector('.sign-up')).toBeTruthy();
   });
 
   it('should show submit button', () => {
     expect(fixture.nativeElement.querySelector('.submit-btn')).toBeTruthy();
+  });
+
+  it('should show home button', () => {
+    expect(fixture.nativeElement.querySelector('.home-btn')).toBeTruthy();
   });
 });

@@ -1,1 +1,27 @@
-<p>login works!</p>
+<section class="login-section flex-center">
+  <h1 class="heading">Login</h1>
+  <div class="login flex-center">
+    <div class="login-input flex-center">
+      <label for="email" class="form-label">Email Address</label>
+      <input
+        (ngModel)="(email)"
+        type="text"
+        name="email"
+        placeholder="Email Address"
+        class="email"
+      />
+    </div>
+    <div class="login-input flex-center">
+      <label for="password" class="form-label">Password</label>
+      <input
+        (ngModel)="(password)"
+        type="text"
+        name="password"
+        placeholder="Password"
+        class="password"
+      />
+    </div>
+    <input type="submit" value="Login" class="login-btn" />
+    <button class="home-btn" routerLink="/">Return Home</button>
+  </div>
+</section>

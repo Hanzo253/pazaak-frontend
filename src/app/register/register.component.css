@@ -50,7 +50,8 @@
   font-size: 1rem;
 }
 
-.submit-btn {
+.submit-btn,
+.home-btn {
   display: inline-block;
   outline: 0;
   cursor: pointer;
@@ -67,7 +68,12 @@
   transition: 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.submit-btn:hover {
+.home-btn {
+  margin: 2rem auto;
+}
+
+.submit-btn:hover,
+.home-btn:hover {
   background-color: #339af0;
   box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
 }

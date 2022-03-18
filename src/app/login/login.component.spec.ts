@@ -22,4 +22,20 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show login heading', () => {
+    expect(fixture.nativeElement.querySelector('.heading')).toBeTruthy();
+  });
+
+  it('should show login form', () => {
+    expect(fixture.nativeElement.querySelector('.login')).toBeTruthy();
+  });
+
+  it('should show login button', () => {
+    expect(fixture.nativeElement.querySelector('.login-btn')).toBeTruthy();
+  });
+
+  it('should show home button', () => {
+    expect(fixture.nativeElement.querySelector('.home-btn')).toBeTruthy();
+  });
 });
