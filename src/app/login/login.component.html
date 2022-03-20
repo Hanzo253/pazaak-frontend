@@ -1,26 +1,36 @@
 <section class="login-section flex-center">
   <h1 class="heading">Login</h1>
-  <div class="login flex-center">
-    <div class="login-input flex-center">
+  <form (ngSubmit)="onSubmit()" class="login flex-center" #loginForm="ngForm">
+    <div class="form-group login-input flex-center">
       <label for="email" class="form-label">Email</label>
       <input
-        (ngModel)="(email)"
+        [(ngModel)]="email"
         type="email"
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
         name="email"
-        class="email"
+        class="email form-control"
+        required
       />
     </div>
-    <div class="login-input flex-center">
+    <div class="form-group login-input flex-center">
       <label for="password" class="form-label">Password</label>
       <input
-        (ngModel)="(password)"
+        [(ngModel)]="password"
         type="password"
         name="password"
-        class="password"
+        pattern=".{8,}"
+        title="Eight or more characters"
+        class="password form-control"
+        required
       />
     </div>
-    <input type="submit" value="Login" class="login-btn" />
+    <input
+      type="submit"
+      value="Login"
+      class="btn login-btn"
+      (click)="loginUser()"
+      [disabled]="!loginForm.form.valid"
+    />
     <button class="home-btn" routerLink="/">Return Home</button>
-  </div>
+  </form>
 </section>

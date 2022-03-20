@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  email: any;
-  password: any;
+  @Input() email: any = "";
+  @Input() password: any;
 
   constructor() { }
+
+  loginUser() {
+    console.log(this.email);
+    console.log(this.password);
+    
+  }
+
+  onSubmit() {
+
+  }
 
   ngOnInit(): void {
   }

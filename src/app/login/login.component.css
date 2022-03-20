@@ -76,3 +76,12 @@
   background-color: #339af0;
   box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
 }
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948; /* green */
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442; /* red */
+}
