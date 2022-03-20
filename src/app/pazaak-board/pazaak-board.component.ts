@@ -246,7 +246,7 @@ export class PazaakBoardComponent implements OnInit {
     alert("Quitting game and retuning to main menu...");
     this.pazaakSong.pause();
     this.pazaakSong.currentTime = 0;
-    this.router.navigate(['']);
+    this.router.navigate(['mainmenu']);
   }
 
   // restarts a round of the game

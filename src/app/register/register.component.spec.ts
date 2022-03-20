@@ -1,4 +1,6 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { RegisterComponent } from './register.component';
 
@@ -8,7 +10,8 @@ describe('RegisterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ]
+      declarations: [ RegisterComponent ],
+      imports: [ FormsModule, HttpClientModule ]
     })
     .compileComponents();
   });
@@ -41,16 +44,12 @@ describe('RegisterComponent', () => {
 
   describe('registerNewUser', () => {
     describe('when user submits sign up form', () => {
-      it('should have a username', () => {
-        expect(component.userName).toBeTruthy();
-      });
-
-      it('should have a email address', () => {
-        expect(component.emailAddress).toBeTruthy();
-      });
-
-      it('should have a password', () => {
-        expect(component.password).toBeTruthy();
+      it('newUser should have a username, emailAddress, password', () => {
+        component.userName = "Hanzo253";
+        component.emailAddress = "hanzo253@yahoo.com";
+        component.password = "apassword";
+        component.registerNewUser();
+        expect(component.newUser).toBeTruthy();
       });
     });
   });

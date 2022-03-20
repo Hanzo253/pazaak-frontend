@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 import { User } from '../interface/user';
 
 @Injectable({
@@ -13,7 +13,8 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   register(user: any): Observable<any> { 
-    return this.http.post(`http://localhost:9092/auth/users/register`, user);
+    return this.http.post(`http://localhost:9092/auth/users/register`, user)
+    .pipe(catchError(this.handleError));
   }
 
   login(user: any): Observable<any> { 
@@ -50,5 +51,13 @@ export class UserService {
       'Authorization': `Bearer ${authToken}`
     });
     return this.http.put(`http://localhost:9092/auth/users/losses`, losses, { headers: headers });
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.status === 0) {
+      return throwError("Error message is: " + error.message);
+    } else {
+      return throwError(error.error.message);
+    }
   }
 }
