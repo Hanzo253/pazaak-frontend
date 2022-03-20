@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 import { MatchService } from '../services/match.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-match-history',
@@ -9,11 +10,11 @@ import { MatchService } from '../services/match.service';
 })
 export class MatchHistoryComponent implements OnInit {
 
-  userAuthToken: any = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoaWdoZ3JvdW5kQHlhaG9vLmNvbSIsImV4cCI6MTY0NzAxODQ1NCwiaWF0IjoxNjQ2OTgyNDU0fQ.m9xn_uqgCBMtCvZN86AGjRGgqh7po3MuWcRmprm-f9A"
+  userAuthToken: any = this.userService.userAuthToken;
 
   matches: Array<any> = [];
 
-  constructor(private matchService: MatchService) { }
+  constructor(private userService: UserService, private matchService: MatchService) { }
 
   getAllMatches(authToken: any) {
     this.matchService.getAllMatches(authToken).subscribe(

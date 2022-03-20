@@ -41,4 +41,15 @@ describe('LoginComponent', () => {
   it('should show home button', () => {
     expect(fixture.nativeElement.querySelector('.home-btn')).toBeTruthy();
   });
+
+   describe('loginUser', () => {
+    describe('when user submits sign up form', () => {
+      it('loggedInUser should have an email and password', () => {
+        component.email = "hanzo253@yahoo.com";
+        component.password = "apassword";
+        component.loginUser();
+        expect(component.user).toBeTruthy();
+      });
+    });
+  });
 });

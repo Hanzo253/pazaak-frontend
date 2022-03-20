@@ -51,7 +51,7 @@ export class PazaakBoardComponent implements OnInit {
   playerTurn: boolean = false;
   computerTurn: boolean = false;
 
-  userAuthToken: any = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoaWdoZ3JvdW5kQHlhaG9vLmNvbSIsImV4cCI6MTY0NzAxODQ1NCwiaWF0IjoxNjQ2OTgyNDU0fQ.m9xn_uqgCBMtCvZN86AGjRGgqh7po3MuWcRmprm-f9A"
+  userAuthToken: any = this.userService.userAuthToken;
   playerName: any;
   playerWins: number = 0;
   playerLosses: number = 0;
@@ -314,7 +314,7 @@ export class PazaakBoardComponent implements OnInit {
         this.playerWins++;
         console.log(this.playerWins);
         this.updatedWins = {
-          'wins' : `${this.playerLosses}`
+          'wins' : `${this.playerWins}`
         };
         this.updateWin(this.updatedWins, this.userAuthToken);
         this.match = {
@@ -725,6 +725,9 @@ export class PazaakBoardComponent implements OnInit {
         this.playerName = response.userName;
         this.playerWins = response.wins;
         this.playerLosses = response.losses;
+      },
+      (error: any) => {
+        alert(error);
       }
     );
   }

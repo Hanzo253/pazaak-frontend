@@ -18,7 +18,8 @@ export class UserService {
   }
 
   login(user: any): Observable<any> { 
-    return this.http.post(`http://localhost:9092/auth/users/login`, user);
+    return this.http.post(`http://localhost:9092/auth/users/login`, user)
+    .pipe(catchError(this.handleLoginError));
   }
 
   getLoggedInUser(authToken: any): Observable<any> {
@@ -26,7 +27,8 @@ export class UserService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${authToken}`
     });
-    return this.http.get(`http://localhost:9092/auth/users/user`, { headers: headers });
+    return this.http.get(`http://localhost:9092/auth/users/user`, { headers: headers })
+    .pipe(catchError(this.handleError));
   }
 
   listUsers(): Observable<User[]> {
@@ -59,5 +61,9 @@ export class UserService {
     } else {
       return throwError(error.error.message);
     }
+  }
+
+  private handleLoginError(error: HttpErrorResponse): Observable<never> {
+    return throwError("Login error: Either user account does not exists or incorrect account information.")
   }
 }
