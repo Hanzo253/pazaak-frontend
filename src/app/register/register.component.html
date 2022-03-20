@@ -1,37 +1,56 @@
 <section class="registration-section flex-center">
   <h1 class="heading">Create an account</h1>
-  <div class="sign-up flex-center">
-    <div class="register-input flex-center">
+  <form
+    (ngSubmit)="onSubmit()"
+    class="sign-up flex-center"
+    #registerForm="ngForm"
+  >
+    <div class="form-group register-input flex-center">
       <label for="userName" class="form-label">User Name</label>
       <input
-        (ngModel)="(userName)"
+        [(ngModel)]="userName"
         type="text"
         name="userName"
-        placeholder="User Name"
-        class="username"
+        id="user"
+        class="username form-control"
+        #user="ngModel"
+        required
       />
     </div>
-    <div class="register-input flex-center">
-      <label for="emailAddress" class="form-label">Email Address</label>
+    <div class="form-group register-input flex-center">
+      <label for="emailAddress" class="form-label">
+        Email Address(Required format: name123@site.com)
+      </label>
       <input
-        (ngModel)="(emailAddress)"
-        type="text"
+        [(ngModel)]="emailAddress"
+        type="email"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
         name="emailAddress"
-        placeholder="Email Address"
-        class="email-address"
+        class="email-address form-control"
+        required
       />
     </div>
-    <div class="register-input flex-center">
-      <label for="password" class="form-label">Password</label>
+    <div class="form-group register-input flex-center">
+      <label for="password" class="form-label">
+        Password(Must have 8 characters or more)
+      </label>
       <input
-        (ngModel)="(password)"
-        type="text"
+        [(ngModel)]="password"
+        type="password"
+        pattern=".{8,}"
+        title="Eight or more characters"
         name="password"
-        placeholder="Password"
-        class="password"
+        class="password form-control"
+        required
       />
     </div>
-    <input type="submit" value="Register" class="submit-btn" />
+    <input
+      type="submit"
+      value="Register"
+      class="btn submit-btn"
+      (click)="registerNewUser()"
+      [disabled]="!registerForm.form.valid"
+    />
     <button class="home-btn" routerLink="/">Return Home</button>
-  </div>
+  </form>
 </section>

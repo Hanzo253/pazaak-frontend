@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
       // this.getUser();
       // this.getLoggedInUser("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaXRobG9yZEB5YWhvby5jb20iLCJleHAiOjE2NDYyMjEzOTcsImlhdCI6MTY0NjE4NTM5N30._Hmc4bm6AiU7SoF_9iDtGSxzbDyQZOlTA0B-FFaBUfc");
       // this.registerUser(this.user);
-      this.loginUser(this.loginUserInfo);
+      // this.loginUser(this.loginUserInfo);
 
       // this.createMatch(this.match, this.authToken);
       // this.getAllMatches(this.authToken);

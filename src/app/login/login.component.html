@@ -2,12 +2,12 @@
   <h1 class="heading">Login</h1>
   <div class="login flex-center">
     <div class="login-input flex-center">
-      <label for="email" class="form-label">Email Address</label>
+      <label for="email" class="form-label">Email</label>
       <input
         (ngModel)="(email)"
-        type="text"
+        type="email"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
         name="email"
-        placeholder="Email Address"
         class="email"
       />
     </div>
@@ -15,9 +15,8 @@
       <label for="password" class="form-label">Password</label>
       <input
         (ngModel)="(password)"
-        type="text"
+        type="password"
         name="password"
-        placeholder="Password"
         class="password"
       />
     </div>

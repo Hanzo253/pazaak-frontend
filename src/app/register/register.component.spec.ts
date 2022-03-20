@@ -38,4 +38,20 @@ describe('RegisterComponent', () => {
   it('should show home button', () => {
     expect(fixture.nativeElement.querySelector('.home-btn')).toBeTruthy();
   });
+
+  describe('registerNewUser', () => {
+    describe('when user submits sign up form', () => {
+      it('should have a username', () => {
+        expect(component.userName).toBeTruthy();
+      });
+
+      it('should have a email address', () => {
+        expect(component.emailAddress).toBeTruthy();
+      });
+
+      it('should have a password', () => {
+        expect(component.password).toBeTruthy();
+      });
+    });
+  });
 });
